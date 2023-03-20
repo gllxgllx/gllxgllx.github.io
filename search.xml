@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>hexo使用|新建文章</title>
+      <link href="/2023/03/20/hexo%E4%BD%BF%E7%94%A8-%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0/"/>
+      <url>/2023/03/20/hexo%E4%BD%BF%E7%94%A8-%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="hexo使用-新建文章"><a href="#hexo使用-新建文章" class="headerlink" title=" hexo使用|新建文章"></a><center> hexo使用|新建文章</h1><h2 id="一-新建文章"><a href="#一-新建文章" class="headerlink" title="一.新建文章"></a>一.新建文章</h2><p>1.新建文章很简单，一条命令即可。命令如下，执行命令成功会返回一个路径，就是文章的所在路径，删除文章也只要删除对应的文章文件即可。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new 文章文件名</span><br></pre></td></tr></table></figure><p>2.新建草稿命令如下，草稿不会在博客上显示。在执行时加上 –draft 参数，或是把草稿中render_drafts参数设为true来预览草稿。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new draft 草稿文件名</span><br></pre></td></tr></table></figure><p>3.新建导航选项页界面</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page 导航选项页文件名</span><br></pre></td></tr></table></figure><h2 id="2-发布草稿"><a href="#2-发布草稿" class="headerlink" title="2.发布草稿"></a>2.发布草稿</h2><p>草稿是不会显示到博客上面的，有两张方法发布草稿为正式文章</p><p>1、通过命令</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo publish 文章文件名</span><br></pre></td></tr></table></figure><p>2.通过移动</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">手动将“_drafts”目录下的草稿移动到“_posts”目录下即可发布草稿为正式文章。</span><br></pre></td></tr></table></figure><h2 id="3-添加分类和标签"><a href="#3-添加分类和标签" class="headerlink" title="3.添加分类和标签"></a>3.添加分类和标签</h2><p>文章分类和标签在文章中添加，文章的参数列表如下：</p><table><thead><tr><th align="center">参数</th><th align="center">描述</th><th align="center">默认值</th></tr></thead><tbody><tr><td align="center">layout</td><td align="center">布局</td><td align="center"></td></tr><tr><td align="center">title</td><td align="center">标题</td><td align="center">文章的文件名</td></tr><tr><td align="center">date</td><td align="center">建立日期</td><td align="center">文章建立日期</td></tr><tr><td align="center">updated</td><td align="center">更新日期</td><td align="center">文件更新日期</td></tr><tr><td align="center">comments</td><td align="center">开启文章的评论功能</td><td align="center">true</td></tr><tr><td align="center">tags</td><td align="center">标签</td><td align="center"></td></tr><tr><td align="center">cate</td><td align="center">分类</td><td align="center"></td></tr><tr><td align="center">permalink</td><td align="center">覆盖文章网址</td><td align="center"></td></tr></tbody></table><p>3.1添加分类</p><p>参数“categories”表示分类，一篇文章只能属于一个分类，如果添加了多个分类，则下一个分类为子分类。<br>添加分类的格式如下</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">categories:</span><br><span class="line">- 分类</span><br><span class="line">- 子分类</span><br><span class="line">- 子子分类</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客设置 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> -博客 -hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>第一篇博客</title>
       <link href="/2023/03/15/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
       <url>/2023/03/15/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
