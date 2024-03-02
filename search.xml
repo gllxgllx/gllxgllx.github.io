@@ -11,10 +11,16 @@
         <content type="html"><![CDATA[<h1 id="hexo回归测试"><a href="#hexo回归测试" class="headerlink" title=" hexo回归测试"></a><center> hexo回归测试</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>test</p>]]></content>
       
       
+      <categories>
+          
+          <category> 博客设置 </category>
+          
+      </categories>
+      
       
         <tags>
             
-            <tag> -hexo </tag>
+            <tag> hexo </tag>
             
         </tags>
       
