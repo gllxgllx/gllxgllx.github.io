@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>编译原理课程设计（二）</title>
+      <link href="/2024/03/07/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
+      <url>/2024/03/07/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h1 id="编译原理课程设计（二）"><a href="#编译原理课程设计（二）" class="headerlink" title=" 编译原理课程设计（二）"></a><center> <strong>编译原理课程设计（二）</strong></h1><p>以下是一个简单的示例，以演示整个流程。我们将创建一个支持如下形式的Pascal代码：</p><figure class="highlight pascal"><table><tr><td class="code"><pre><span class="line"><span class="keyword">program</span> SimpleCompiler;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span></span><br><span class="line">  a, b: integer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  a := <span class="number">5</span>;</span><br><span class="line">  b := <span class="number">10</span>;</span><br><span class="line"><span class="keyword">end</span>.</span><br></pre></td></tr></table></figure><p>这个Pascal代码定义了两个整数变量 <code>a</code> 和 <code>b</code>，并给它们分别赋值为 5 和 10。</p><p>让我们从头开始，首先是 <code>lex.l</code> 文件：</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%&#123;</span><br><span class="line">#include &quot;main.h&quot;</span><br><span class="line">#include &quot;yacc.tab.h&quot;</span><br><span class="line">extern &quot;C&quot; &#123;</span><br><span class="line">    int yylval;</span><br><span class="line">&#125;</span><br><span class="line">%&#125;</span><br><span class="line"></span><br><span class="line">%option noyywrap</span><br><span class="line"></span><br><span class="line">%%</span><br><span class="line">[ \t\n]     ; // Skip whitespace</span><br><span class="line">[a-zA-Z][a-zA-Z0-9]*   &#123;</span><br><span class="line">                          yylval = strdup(yytext);</span><br><span class="line">                          return IDENTIFIER;</span><br><span class="line">                      &#125;</span><br><span class="line">:=          return ASSIGN;</span><br><span class="line">[0-9]+      &#123;</span><br><span class="line">                          yylval = atoi(yytext);</span><br><span class="line">                          return INTEGER;</span><br><span class="line">                      &#125;</span><br><span class="line">\;          return SEMICOLON;</span><br><span class="line">\.          return PERIOD;</span><br><span class="line">.           ;</span><br><span class="line">%%</span><br></pre></td></tr></table></figure><p>在这个简单的 <code>lex.l</code> 文件中，我们定义了标识符、赋值符号 <code>:=</code>、整数、分号 <code>;</code>、句点 <code>.</code> 等的词法规则。这里使用了一些简化，比如忽略了空白和换行符。</p><p>接下来是 <code>yacc.y</code> 文件：</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%&#123;</span><br><span class="line">#include &quot;main.h&quot;</span><br><span class="line">extern &quot;C&quot; &#123;</span><br><span class="line">    int yylex();</span><br><span class="line">    void yyerror(const char* s);</span><br><span class="line">&#125;</span><br><span class="line">%&#125;</span><br><span class="line"></span><br><span class="line">%union &#123;</span><br><span class="line">    int intval;</span><br><span class="line">    char* strval;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">%token &lt;intval&gt; INTEGER</span><br><span class="line">%token &lt;strval&gt; IDENTIFIER</span><br><span class="line">%token ASSIGN SEMICOLON PERIOD</span><br><span class="line"></span><br><span class="line">%start program</span><br><span class="line"></span><br><span class="line">%%</span><br><span class="line">program: block PERIOD &#123;</span><br><span class="line">    printf(&quot;Compilation successful!\n&quot;);</span><br><span class="line">    exit(0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">block: BEGIN statement_list END &#123;</span><br><span class="line">    printf(&quot;Executing program...\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">statement_list: statement &#123;</span><br><span class="line">    printf(&quot;Statement executed\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line">| statement_list SEMICOLON statement &#123;</span><br><span class="line">    printf(&quot;Statement executed\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">statement: assignment &#123;</span><br><span class="line">    printf(&quot;Assignment statement\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">assignment: IDENTIFIER ASSIGN expression &#123;</span><br><span class="line">    printf(&quot;Assigning value to %s\n&quot;, $1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">expression: INTEGER &#123;</span><br><span class="line">    $$ = $1;</span><br><span class="line">&#125;</span><br><span class="line">| IDENTIFIER &#123;</span><br><span class="line">    $$ = lookup_variable($1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">%%</span><br><span class="line"></span><br><span class="line">void yyerror(const char* s) &#123;</span><br><span class="line">    fprintf(stderr, &quot;Error: %s\n&quot;, s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int lookup_variable(const char* var) &#123;</span><br><span class="line">    // Dummy implementation for variable lookup</span><br><span class="line">    printf(&quot;Looking up variable %s\n&quot;, var);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    printf(&quot;Simple Pascal Compiler\n&quot;);</span><br><span class="line">    yyparse();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这个简单的 <code>yacc.y</code> 文件定义了一个非常基本的语法，其中包含程序、块、语句列表、语句和赋值语句等。为了简化，这个编译器不执行实际的代码生成，而是输出一些信息表示语法分析和语义分析的阶段。实际的编译器需要更复杂的处理和数据结构来生成目标代码。</p><p>在这个示例中，我们使用了一个虚构的 <code>lookup_variable</code> 函数来模拟变量查找。在实际编译器中，这将是符号表的一部分，并用于跟踪和查找变量。</p><p>这个简单的编译器仅演示了Pascal语法的一小部分，且没有进行实际的代码生成。在实际的编译器中，将需要更多的规则来覆盖Pascal语言的其他方面，以及生成实际的目标代码。</p><p>可以按照这个基础示例继续扩展编译器，以处理更多的Pascal语法和语义规则。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 课程学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 课程设计 </tag>
+            
+            <tag> 编译原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>编译原理课程设计（一）</title>
+      <link href="/2024/03/07/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/"/>
+      <url>/2024/03/07/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="编译原理课程设计（一）"><a href="#编译原理课程设计（一）" class="headerlink" title=" 编译原理课程设计（一）"></a><center> <strong>编译原理课程设计（一）</strong></h1><h2 id="流程大致如下："><a href="#流程大致如下：" class="headerlink" title="流程大致如下："></a><strong>流程大致如下：</strong></h2><h3 id="1-词法分析（Lex）："><a href="#1-词法分析（Lex）：" class="headerlink" title="1. 词法分析（Lex）："></a>1. <strong>词法分析（Lex）：</strong></h3><ul><li>使用Lex工具对Pascal源代码进行词法分析，将源代码转换为记号序列。</li><li>在 <code>lex.l</code> 文件中定义正则表达式规则，匹配Pascal中的标识符、整数、运算符等记号。</li><li>通过 <code>yylval</code> 结构体传递识别出的记号的值，其中 <code>YYSTYPE</code> 被重定义为 <code>struct Type</code>，可以存储多种信息。</li></ul><h3 id="2-语法分析（Yacc）："><a href="#2-语法分析（Yacc）：" class="headerlink" title="2. 语法分析（Yacc）："></a>2. <strong>语法分析（Yacc）：</strong></h3><ul><li>使用Yacc工具对Pascal源代码进行语法分析，构建语法树。</li><li>在 <code>yacc.y</code> 文件中定义语法规则，描述Pascal中的语法结构，同时通过 <code>%token</code> 和 <code>%type</code> 声明记号和非终结符的属性。</li><li>使用动作代码构建抽象语法树，将 <code>$$</code> 和 <code>$1</code> 等符号映射到 <code>YYSTYPE</code> 结构体中的成员，将记号的属性传递给语法树节点。</li></ul><h3 id="3-生成语法树（AST）："><a href="#3-生成语法树（AST）：" class="headerlink" title="3. 生成语法树（AST）："></a>3. <strong>生成语法树（AST）：</strong></h3><ul><li>在 <code>yacc.y</code> 文件中定义产生式和相应的动作代码，以构建抽象语法树。</li><li>语法树的节点类型和属性由 <code>YYSTYPE</code> 结构体中的成员决定，如标识符、整数、运算符等。</li></ul><h3 id="4-代码生成："><a href="#4-代码生成：" class="headerlink" title="4. 代码生成："></a>4. <strong>代码生成：</strong></h3><ul><li>遍历抽象语法树，将每个节点翻译为等效的C语言代码。</li><li>在 <code>yacc.y</code> 文件中定义语法规则时，通过动作代码将翻译后的C代码输出或执行。</li><li>对于不同的语法结构，可能需要生成不同的C代码，考虑Pascal和C之间的差异。</li></ul><h3 id="5-整体流程："><a href="#5-整体流程：" class="headerlink" title="5. 整体流程："></a>5. <strong>整体流程：</strong></h3><ul><li>主函数 (<code>main</code>) 初始化输入文件，调用 <code>yyparse()</code> 开始语法分析过程。</li><li>Lex的 <code>yylex()</code> 函数读取记号序列，Yacc按照语法规则进行分析。</li><li>在分析的过程中，动作代码构建抽象语法树，同时输出或执行相应的C代码。</li><li>在语法分析结束后，得到翻译后的C代码。</li></ul><p>总体来说，该流程涵盖了从Pascal到C的编译器设计的主要步骤，包括词法分析、语法分析、生成抽象语法树以及最终的代码生成。在具体实现时，需要根据Pascal语言的语法和语义规则以及C语言的特性进行详细设计和实现。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 课程学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 课程设计 </tag>
+            
+            <tag> 编译原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>test</title>
       <link href="/2024/03/02/test/"/>
       <url>/2024/03/02/test/</url>
