@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>编译原理课程设计（三）</title>
+      <link href="/2024/03/07/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%89%EF%BC%89/"/>
+      <url>/2024/03/07/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%89%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h1 id="编译原理课程设计（三）"><a href="#编译原理课程设计（三）" class="headerlink" title=" 编译原理课程设计（三）"></a><center> <strong>编译原理课程设计（三）</strong></h1><h2 id="运行这个简易的编译器需要一些步骤。以下是基本的流程："><a href="#运行这个简易的编译器需要一些步骤。以下是基本的流程：" class="headerlink" title="运行这个简易的编译器需要一些步骤。以下是基本的流程："></a>运行这个简易的编译器需要一些步骤。以下是基本的流程：</h2><h3 id="1-安装-Flex-和-Bison："><a href="#1-安装-Flex-和-Bison：" class="headerlink" title="1. 安装 Flex 和 Bison："></a>1. <strong>安装 Flex 和 Bison：</strong></h3><p>   你需要确保系统上安装了 Flex 和 Bison。它们是用于生成词法分析器和语法分析器的工具。你可以通过包管理器安装它们，例如在 Ubuntu 上使用以下命令：</p>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install flex bison</span><br></pre></td></tr></table></figure><p>   对于其他系统，请使用相应的包管理器进行安装。</p><h3 id="2-编译-Lex-和-Yacc-文件："><a href="#2-编译-Lex-和-Yacc-文件：" class="headerlink" title="2. 编译 Lex 和 Yacc 文件："></a>2. <strong>编译 Lex 和 Yacc 文件：</strong></h3><p>   打开终端，进入包含 <code>lex.l</code> 和 <code>yacc.y</code> 文件的目录，然后运行以下命令编译它们：</p>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">flex lex.l</span><br><span class="line">bison -dy yacc.y</span><br></pre></td></tr></table></figure><p>   这将生成 <code>lex.yy.c</code> 和 <code>y.tab.c</code> 文件。</p><h3 id="3-编译和链接："><a href="#3-编译和链接：" class="headerlink" title="3. 编译和链接："></a>3. <strong>编译和链接：</strong></h3><p>   继续在终端中运行以下命令编译和链接程序：</p>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">g++ -o simple_compiler lex.yy.c y.tab.c main.cpp</span><br></pre></td></tr></table></figure><p>   这将生成可执行文件 <code>simple_compiler</code>。</p><h3 id="4-运行程序："><a href="#4-运行程序：" class="headerlink" title="4. 运行程序："></a>4. <strong>运行程序：</strong></h3><p>   运行生成的编译器，并将 Pascal 代码作为输入：</p>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./simple_compiler &lt; input.pas</span><br></pre></td></tr></table></figure><p>   其中 <code>input.pas</code> 是包含 Pascal 代码的文件。在这个示例中，你可以使用提供的简单 Pascal 代码。</p><p>请注意，这个简易的编译器只是演示流程的一部分，实际编译器需要更复杂的处理，包括错误处理、代码生成等。此外，由于我们的示例不生成实际的目标代码，程序输出的信息主要用于演示流程和调试目的。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 课程学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 课程设计 </tag>
+            
+            <tag> 编译原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>编译原理课程设计（二）</title>
       <link href="/2024/03/07/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
       <url>/2024/03/07/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
