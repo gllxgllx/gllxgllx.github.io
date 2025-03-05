@@ -4,6 +4,29 @@
   
     
     <entry>
+      <title>简历知识点</title>
+      <link href="/2025/03/05/%E7%AE%80%E5%8E%86%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+      <url>/2025/03/05/%E7%AE%80%E5%8E%86%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+      
+        <content type="html"><![CDATA[<hr><h3 id="一、技术基础"><a href="#一、技术基础" class="headerlink" title="一、技术基础"></a><strong>一、技术基础</strong></h3><h4 id="1-Java核心"><a href="#1-Java核心" class="headerlink" title="1. Java核心"></a>1. <strong>Java核心</strong></h4><p>   • <strong>集合</strong>：HashMap底层结构（数组+链表&#x2F;红黑树）、ConcurrentHashMap分段锁机制、ArrayList vs LinkedList<br>   • <strong>并发</strong>：synchronized锁升级过程、ReentrantLock的AQS实现、线程池参数（核心&#x2F;最大线程数、队列类型）<br>   • <strong>JVM</strong>：内存分区（堆、栈、方法区）、GC算法（CMS&#x2F;G1区别）、OOM排查工具（jstat、MAT）</p><h4 id="2-数据库"><a href="#2-数据库" class="headerlink" title="2. 数据库"></a>2. <strong>数据库</strong></h4><p>   • <strong>事务</strong>：ACID特性、脏读&#x2F;不可重复读&#x2F;幻读场景、MVCC实现原理<br>   • <strong>索引</strong>：B+树结构、最左前缀原则、覆盖索引优化、索引失效场景（如LIKE “%xx”）<br>   • <strong>锁</strong>：行锁 vs 表锁、死锁检测（SHOW ENGINE INNODB STATUS）</p><h4 id="3-Spring框架"><a href="#3-Spring框架" class="headerlink" title="3. Spring框架"></a>3. <strong>Spring框架</strong></h4><p>   • <strong>IOC</strong>：Bean生命周期、依赖注入方式（构造器 vs @Autowired）<br>   • <strong>AOP</strong>：动态代理（JDK&#x2F;CGLIB）、切面执行顺序（@Order）、事务传播机制</p><h4 id="4-Redis"><a href="#4-Redis" class="headerlink" title="4. Redis"></a>4. <strong>Redis</strong></h4><p>   • <strong>缓存穿透&#x2F;雪崩&#x2F;击穿</strong>：解决方案（布隆过滤器、随机过期时间、互斥锁）<br>   • <strong>数据结构</strong>：String&#x2F;Hash适用场景、ZSet跳表实现、持久化机制（RDB&#x2F;AOF）<br>   • <strong>分布式锁</strong>：Redisson看门狗机制、与ZooKeeper对比</p><h4 id="5-设计模式"><a href="#5-设计模式" class="headerlink" title="5. 设计模式"></a>5. <strong>设计模式</strong></h4><p>   • <strong>单例</strong>：双重检查锁、静态内部类实现<br>   • <strong>工厂模式</strong>：Spring BeanFactory vs FactoryBean<br>   • <strong>代理模式</strong>：动态代理在Spring AOP中的应用</p><hr><h3 id="二、项目亮点"><a href="#二、项目亮点" class="headerlink" title="二、项目亮点"></a><strong>二、项目亮点</strong></h3><h4 id="1-JWT身份验证"><a href="#1-JWT身份验证" class="headerlink" title="1. JWT身份验证"></a>1. <strong>JWT身份验证</strong></h4><p>   • <strong>技术点</strong>：Token结构（Header&#x2F;Payload&#x2F;Signature）、如何防篡改（签名算法）<br>   • <strong>优化</strong>：ThreadLocal保存用户上下文、拦截器链的执行顺序</p><h4 id="2-分布式锁（Redis-Lua）"><a href="#2-分布式锁（Redis-Lua）" class="headerlink" title="2. 分布式锁（Redis + Lua）"></a>2. <strong>分布式锁（Redis + Lua）</strong></h4><p>   • <strong>关键逻辑</strong>：Lua脚本保证原子性、锁续期问题（需说明未实现续期的潜在风险）<br>   • <strong>对比方案</strong>：Redisson的看门狗机制、ZooKeeper临时有序节点</p><h4 id="3-Redis缓存设计"><a href="#3-Redis缓存设计" class="headerlink" title="3. Redis缓存设计"></a>3. <strong>Redis缓存设计</strong></h4><p>   • <strong>淘汰策略</strong>：LRU vs LFU、缓存预热&#x2F;降级方案<br>   • <strong>一致性</strong>：双写一致性方案（先更新库还是先删缓存？）</p><h4 id="4-WebSocket长连接"><a href="#4-WebSocket长连接" class="headerlink" title="4. WebSocket长连接"></a>4. <strong>WebSocket长连接</strong></h4><p>   • <strong>对比HTTP轮询</strong>：减少无效请求、如何解决断线重连<br>   • <strong>性能优化</strong>：心跳机制、连接数管理（Netty的ChannelGroup）</p><h4 id="5-Spring-Task定时任务"><a href="#5-Spring-Task定时任务" class="headerlink" title="5. Spring Task定时任务"></a>5. <strong>Spring Task定时任务</strong></h4><p>   • <strong>缺点</strong>：单机任务阻塞问题、集群环境下任务重复执行<br>   • <strong>替代方案</strong>：分布式任务框架（XXL-JOB、Quartz）</p><h4 id="6-分布式Session"><a href="#6-分布式Session" class="headerlink" title="6. 分布式Session"></a>6. <strong>分布式Session</strong></h4><p>   • <strong>Hash vs String</strong>：内存节省原理（Hash字段独立存储）、部分更新优势<br>   • <strong>扩展问题</strong>：Redis集群下Session同步方案（一致性哈希）</p><hr><h3 id="三、扩展问题"><a href="#三、扩展问题" class="headerlink" title="三、扩展问题"></a><strong>三、扩展问题</strong></h3><ol><li><strong>系统设计</strong>：如何设计一个高并发秒杀系统（限流、削峰、异步扣库存）？</li><li><strong>场景题</strong>：订单超时未支付如何实现？（Redis过期Key监听 vs 延迟队列）</li><li><strong>故障排查</strong>：线上接口响应慢，如何定位问题？（链路追踪、慢SQL分析、线程Dump）</li><li><strong>优化经验</strong>：项目中遇到的最大性能瓶颈是什么？如何解决的？</li></ol><hr><h3 id="四、软技能"><a href="#四、软技能" class="headerlink" title="四、软技能"></a><strong>四、软技能</strong></h3><ol><li><strong>项目难点</strong>：用STAR法则描述一个技术挑战（如高并发下的超卖问题）。</li><li><strong>团队协作</strong>：如何与前端&#x2F;测试协作？代码冲突如何解决？</li><li><strong>学习能力</strong>：最近学习的开源技术（如RocketMQ、Elasticsearch）。</li></ol><hr><h3 id="五、高频问题示例"><a href="#五、高频问题示例" class="headerlink" title="五、高频问题示例"></a><strong>五、高频问题示例</strong></h3><ol><li><strong>JWT的优缺点</strong>：无状态 vs 无法主动失效（需结合Redis黑名单解决）。</li><li><strong>为什么用Lua脚本</strong>：保证原子性（避免客户端多命令执行失败）。</li><li><strong>ThreadLocal内存泄漏</strong>：为什么用弱引用？如何避免（remove()清理）？</li><li><strong>Spring Boot自动配置</strong>：@EnableAutoConfiguration原理（spring.factories加载）。</li></ol><hr><p><strong>准备建议</strong>：<br>• <strong>技术细节</strong>：每个功能点至少能说出2种实现方案及其优缺点。<br>• <strong>项目闭环</strong>：数据验证（如缓存命中率提升多少？超卖降低多少？）。<br>• <strong>模拟面试</strong>：找朋友模拟技术深挖，尤其是项目中的技术选型逻辑。  </p><p>祝面试顺利！ 🚀</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 春招 </tag>
+            
+            <tag> 简历 </tag>
+            
+            <tag> 八股 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>苍穹外卖技术要点1</title>
       <link href="/2025/03/02/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96%E6%8A%80%E6%9C%AF%E8%A6%81%E7%82%B91/"/>
       <url>/2025/03/02/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96%E6%8A%80%E6%9C%AF%E8%A6%81%E7%82%B91/</url>
