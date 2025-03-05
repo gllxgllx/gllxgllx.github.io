@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>项目详细拷打 | 格 致</title><meta name="author" content="怪陆离辛"><meta name="copyright" content="怪陆离辛"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、项目概述回答模板：    “我负责的是基于Spring Boot的校园点餐系统，分为客户端（微信小程序）和商家端（Web管理后台）。核心功能包括在线点餐、订单管理、高并发库存控制、实时通知等。我重点解决了分布式锁防超卖、JWT无状态认证、Redis缓存优化、WebSocket实时通信等技术难点。”   二、技术点拆解与追问预测1. 登录与身份验证（JWT + ThreadLocal）引导问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目详细拷打">
+<meta property="og:url" content="http://example.com/2025/03/05/%E9%A1%B9%E7%9B%AE%E8%AF%A6%E7%BB%86%E6%8B%B7%E6%89%93/index.html">
+<meta property="og:site_name" content="格 致">
+<meta property="og:description" content="一、项目概述回答模板：    “我负责的是基于Spring Boot的校园点餐系统，分为客户端（微信小程序）和商家端（Web管理后台）。核心功能包括在线点餐、订单管理、高并发库存控制、实时通知等。我重点解决了分布式锁防超卖、JWT无状态认证、Redis缓存优化、WebSocket实时通信等技术难点。”   二、技术点拆解与追问预测1. 登录与身份验证（JWT + ThreadLocal）引导问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/8.png">
+<meta property="article:published_time" content="2025-03-05T14:25:50.000Z">
+<meta property="article:modified_time" content="2025-03-05T14:42:24.059Z">
+<meta property="article:author" content="怪陆离辛">
+<meta property="article:tag" content="项目">
+<meta property="article:tag" content="春招">
+<meta property="article:tag" content="八股">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/8.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/03/05/%E9%A1%B9%E7%9B%AE%E8%AF%A6%E7%BB%86%E6%8B%B7%E6%89%93/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '项目详细拷打',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-03-05 22:42:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><link rel="stylesheet" href="/css/xxx.css"><link rel="stylesheet" href="/css/iconfont.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zyoushuo/Blog@latest/hexo/css/loading_style_1.css" ><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zyoushuo/Blog@latest/hexo/css/loading_style_2.css" ><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="wizard-scene"><div class="wizard-objects"><div class="wizard-square"></div><div class="wizard-circle"></div><div class="wizard-triangle"></div></div><div class="wizard"><div class="wizard-body"></div><div class="wizard-right-arm"><div class="wizard-right-hand"></div></div><div class="wizard-left-arm"><div class="wizard-left-hand"></div></div><div class="wizard-head"><div class="wizard-beard"></div><div class="wizard-face"><div class="wizard-adds"></div></div><div class="wizard-hat"><div class="wizard-hat-of-the-hat"></div><div class="wizard-four-point-star --first"></div><div class="wizard-four-point-star --second"></div><div class="wizard-four-point-star --third"></div></div></div></div></div></div><script async="async"> var preloader = {
+   endLoading: () => {
+     document.body.style.overflow = 'auto';
+     document.getElementById('loading-box').classList.add("loaded")
+   },
+   initLoading: () => {
+     document.body.style.overflow = '';
+     document.getElementById('loading-box').classList.remove("loaded")
+
+   }
+ }
+setTimeout(function(){preloader.endLoading();}, 3000);</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-braille"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fa fa-images"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fa fa-beer"></i><span> 追番</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-sitemap"></i><span> 相关</span></a></li><li><a class="site-page child" href="/myself/"><i class="fa-fw fa fa-id-card"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/timeline/"><i class="fa-fw fa fa-bell"></i><span> 日志</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/8.png')"><nav id="nav"><span id="blog-info"><a href="/" title="格 致"><span class="site-name">格 致</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-braille"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fa fa-images"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fa fa-beer"></i><span> 追番</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-sitemap"></i><span> 相关</span></a></li><li><a class="site-page child" href="/myself/"><i class="fa-fw fa fa-id-card"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/timeline/"><i class="fa-fw fa fa-bell"></i><span> 日志</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">项目详细拷打</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-05T14:25:50.000Z" title="发表于 2025-03-05 22:25:50">2025-03-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-05T14:42:24.059Z" title="更新于 2025-03-05 22:42:24">2025-03-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="项目详细拷打"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><hr>
+<h3 id="一、项目概述"><a href="#一、项目概述" class="headerlink" title="一、项目概述"></a><strong>一、项目概述</strong></h3><p><strong>回答模板</strong>：  </p>
+<blockquote>
+<p>“我负责的是基于Spring Boot的校园点餐系统，分为客户端（微信小程序）和商家端（Web管理后台）。核心功能包括在线点餐、订单管理、高并发库存控制、实时通知等。我重点解决了分布式锁防超卖、JWT无状态认证、Redis缓存优化、WebSocket实时通信等技术难点。”</p>
+</blockquote>
+<hr>
+<h3 id="二、技术点拆解与追问预测"><a href="#二、技术点拆解与追问预测" class="headerlink" title="二、技术点拆解与追问预测"></a><strong>二、技术点拆解与追问预测</strong></h3><h4 id="1-登录与身份验证（JWT-ThreadLocal）"><a href="#1-登录与身份验证（JWT-ThreadLocal）" class="headerlink" title="1. 登录与身份验证（JWT + ThreadLocal）"></a><strong>1. 登录与身份验证（JWT + ThreadLocal）</strong></h4><p><strong>引导问题</strong>：<br>• 为什么选择JWT而不是Session？<br>• 如何保证Token的安全性？<br>• ThreadLocal可能有什么风险？  </p>
+<p><strong>技术要点</strong>：<br>• <strong>JWT结构</strong>：Header（算法）、Payload（用户数据）、Signature（签名防篡改）。<br>• <strong>无状态优势</strong>：适合分布式系统，减少服务端存储压力。<br>• <strong>安全问题</strong>：<br>  • Token泄露风险 → 结合HTTPS、设置较短过期时间。<br>  • 主动失效困难 → 用Redis维护黑名单（如用户注销时记录未过期的Token）。<br>• <strong>ThreadLocal内存泄漏</strong>：<br>  • 原因：Tomcat线程池复用线程，未remove()导致用户信息残留。<br>  • 解决：拦截器销毁前调用<code>ThreadLocal.remove()</code>。  </p>
+<hr>
+<h4 id="2-分布式锁（Redis-Lua）"><a href="#2-分布式锁（Redis-Lua）" class="headerlink" title="2. 分布式锁（Redis + Lua）"></a><strong>2. 分布式锁（Redis + Lua）</strong></h4><p><strong>引导问题</strong>：<br>• 为什么用Lua脚本？<br>• 锁的过期时间设置多久？如何续期？<br>• 是否会出现锁误删（删了别人的锁）？  </p>
+<p><strong>技术要点</strong>：<br>• <strong>Lua原子性</strong>：确保<code>setnx + expire</code>操作原子执行，避免死锁。<br>• <strong>锁误删风险</strong>：<br>  • 场景：线程A超时释放锁，但仍在执行业务 → 线程B获锁，A完成后误删B的锁。<br>  • 解决：锁value存储唯一标识（如UUID），删除前校验标识。<br>• <strong>续期问题</strong>：<br>  • 未实现续期 → 业务执行时间超过锁过期时间会导致锁失效。<br>  • 改进方案：使用Redisson的<code>watchDog</code>机制自动续期。  </p>
+<hr>
+<h4 id="3-Redis缓存（菜品缓存-内存优化）"><a href="#3-Redis缓存（菜品缓存-内存优化）" class="headerlink" title="3. Redis缓存（菜品缓存 + 内存优化）"></a><strong>3. Redis缓存（菜品缓存 + 内存优化）</strong></h4><p><strong>引导问题</strong>：<br>• 缓存和数据库如何保证一致性？<br>• 为什么用Hash结构存储用户信息？<br>• 遇到过缓存穿透&#x2F;雪崩吗？如何解决？  </p>
+<p><strong>技术要点</strong>：<br>• <strong>缓存一致性</strong>：<br>  • 方案：更新数据库后<strong>删除缓存</strong>（而非更新缓存），下次查询时重建。<br>  • 潜在问题：删除缓存失败 → 通过消息队列重试。<br>• <strong>Hash结构优势</strong>：<br>  • 节省内存：Hash的<code>ziplist</code>编码在字段少时压缩存储。<br>  • 部分更新：可单独修改某个字段（如用户昵称），而String需要反序列化整个对象。<br>• <strong>缓存雪崩</strong>：<br>  • 现象：大量缓存同时过期 → 请求压到数据库。<br>  • 解决：随机过期时间（基础时间 + 随机偏移量）。  </p>
+<hr>
+<h4 id="4-WebSocket实时通信（来单提醒-x2F-催单）"><a href="#4-WebSocket实时通信（来单提醒-x2F-催单）" class="headerlink" title="4. WebSocket实时通信（来单提醒&#x2F;催单）"></a><strong>4. WebSocket实时通信（来单提醒&#x2F;催单）</strong></h4><p><strong>引导问题</strong>：<br>• WebSocket和HTTP轮询有什么区别？<br>• 如何保证消息的可靠传输（比如断网了怎么办）？<br>• 服务端如何管理大量连接？  </p>
+<p><strong>技术要点</strong>：<br>• <strong>对比HTTP轮询</strong>：<br>  • WebSocket：长连接双向通信，减少无效请求，适合实时场景。<br>  • HTTP轮询：频繁建立连接，延迟高。<br>• <strong>断线重连</strong>：<br>  • 客户端监听<code>onclose</code>事件，尝试重连并重新订阅。<br>  • 服务端记录会话状态，重连后补发未确认消息（需业务设计消息ID）。<br>• <strong>连接管理</strong>：<br>  • 使用<code>ConcurrentHashMap</code>或Redis存储在线用户与Session的映射。  </p>
+<hr>
+<h4 id="5-Spring-Task定时任务（订单超时取消）"><a href="#5-Spring-Task定时任务（订单超时取消）" class="headerlink" title="5. Spring Task定时任务（订单超时取消）"></a><strong>5. Spring Task定时任务（订单超时取消）</strong></h4><p><strong>引导问题</strong>：<br>• 分布式环境下多个服务节点会重复执行任务吗？<br>• 任务执行时间长导致阻塞怎么办？<br>• 有没有更好的方案替代Spring Task？  </p>
+<p><strong>技术要点</strong>：<br>• <strong>分布式问题</strong>：<br>  • 多个节点同时执行任务 → 通过Redis分布式锁或数据库乐观锁保证唯一性。<br>• <strong>阻塞问题</strong>：<br>  • 原因：Spring Task默认单线程执行任务 → 使用<code>@Async</code>+线程池异步处理。<br>• <strong>替代方案</strong>：<br>  • XXL-JOB：支持分片任务、动态扩容、失败重试。<br>  • RabbitMQ延迟队列：订单创建时发送延迟消息，到期后消费消息取消订单。  </p>
+<hr>
+<h4 id="6-分布式Session（Redis-Hash）"><a href="#6-分布式Session（Redis-Hash）" class="headerlink" title="6. 分布式Session（Redis + Hash）"></a><strong>6. 分布式Session（Redis + Hash）</strong></h4><p><strong>引导问题</strong>：<br>• 为什么用Redis存Session？和Tomcat Session对比有什么优势？<br>• Hash结构比String具体节省多少内存？如何验证的？<br>• 集群环境下Redis挂了怎么办？  </p>
+<p><strong>技术要点</strong>：<br>• <strong>Redis优势</strong>：<br>  • 跨服务共享Session，支持水平扩展。<br>  • 对比Tomcat Session：无需粘性会话，适合集群部署。<br>• <strong>内存优化验证</strong>：<br>  • 用<code>redis-memory-analyzer</code>工具分析String和Hash的内存占用差异。<br>  • 例如：用户对象有10个字段 → String存JSON需1KB，Hash用ziplist编码可能仅500B。<br>• <strong>高可用</strong>：<br>  • Redis主从集群 + Sentinel故障转移。<br>  • 多级缓存：本地缓存 + Redis，避免Redis不可用时完全崩溃。  </p>
+<hr>
+<h3 id="三、项目扩展问题预测"><a href="#三、项目扩展问题预测" class="headerlink" title="三、项目扩展问题预测"></a><strong>三、项目扩展问题预测</strong></h3><ol>
+<li><p><strong>系统性能数据</strong>：<br>• “缓存优化后，QPS从多少提升到多少？”<br>• “分布式锁减少超卖多少百分比？”<br>• <strong>回答建议</strong>：给出量化结果（如缓存命中率从30%→90%，超卖率从5%→0.1%）。</p>
+</li>
+<li><p><strong>技术选型对比</strong>：<br>• “为什么选MyBatis而不是JPA？”<br>• “为什么不用Kafka而用Redis做消息队列？”<br>• <strong>回答建议</strong>：结合业务场景（如MyBatis灵活SQL优化，Redis轻量且已有基础设施）。</p>
+</li>
+<li><p><strong>系统设计缺陷</strong>：<br>• “如果订单量增加10倍，系统哪里会先崩？如何优化？”<br>• <strong>回答建议</strong>：分库分表（用户ID分片）、订单表冷热分离、Redis集群扩容。</p>
+</li>
+</ol>
+<hr>
+<h3 id="四、回答技巧"><a href="#四、回答技巧" class="headerlink" title="四、回答技巧"></a><strong>四、回答技巧</strong></h3><ol>
+<li><p><strong>STAR法则</strong>：<br>• <strong>Situation</strong>：项目背景（如高并发点餐场景）。<br>• <strong>Task</strong>：你负责的功能（如防止超卖）。<br>• <strong>Action</strong>：具体技术方案（Redis分布式锁 + Lua）。<br>• <strong>Result</strong>：量化结果（超卖率下降至0.1%）。  </p>
+</li>
+<li><p><strong>主动引导</strong>：<br>• 如果面试官问题模糊，可主动展开：“需要我详细说明分布式锁的实现吗？”  </p>
+</li>
+<li><p><strong>承认不足</strong>：<br>• 如果被问到未考虑的漏洞，可回答：“当时确实没考虑到这点，后续可以通过XX方案改进。”</p>
+</li>
+</ol>
+<hr>
+<p><strong>最后准备建议</strong>：<br>• 对每个技术点至少准备一个<strong>成功案例</strong>（如解决超卖）和一个<strong>反思点</strong>（如锁未续期）。<br>• 用本地IDE或纸笔画出核心架构图（如订单处理流程），面试时边画边讲更清晰。  </p>
+<p>祝你在AI面试中表现自信，顺利通关！ 🚀</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">怪陆离辛</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/03/05/%E9%A1%B9%E7%9B%AE%E8%AF%A6%E7%BB%86%E6%8B%B7%E6%89%93/">http://example.com/2025/03/05/%E9%A1%B9%E7%9B%AE%E8%AF%A6%E7%BB%86%E6%8B%B7%E6%89%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">格 致</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE/">项目</a><a class="post-meta__tags" href="/tags/%E6%98%A5%E6%8B%9B/">春招</a><a class="post-meta__tags" href="/tags/%E5%85%AB%E8%82%A1/">八股</a></div><div class="post_share"><div class="social-share" data-image="/img/8.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/03/05/%E9%A1%B9%E7%9B%AEJWT%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目JWT知识点拷打"><img class="cover" src="/img/9.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">项目JWT知识点拷打</div></div></a></div><div class="next-post pull-right"><a href="/2025/03/05/%E7%AE%80%E5%8E%86%E7%9F%A5%E8%AF%86%E7%82%B9/" title="简历知识点"><img class="cover" src="/img/10.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">简历知识点</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2025/03/05/%E9%A1%B9%E7%9B%AEJWT%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目JWT知识点拷打"><img class="cover" src="/img/9.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="title">项目JWT知识点拷打</div></div></a></div><div><a href="/2025/03/05/%E9%A1%B9%E7%9B%AERedis-Lua%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目Redis+Lua知识点拷打"><img class="cover" src="/img/12.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="title">项目Redis+Lua知识点拷打</div></div></a></div><div><a href="/2025/03/05/%E9%A1%B9%E7%9B%AESpring-Task%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目Spring Task知识点拷打"><img class="cover" src="/img/12.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="title">项目Spring Task知识点拷打</div></div></a></div><div><a href="/2025/03/05/%E9%A1%B9%E7%9B%AEwebsocket%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目websocket知识点拷打"><img class="cover" src="/img/6.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="title">项目websocket知识点拷打</div></div></a></div><div><a href="/2025/03/05/%E9%A1%B9%E7%9B%AERedis%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目Redis缓存优化知识点拷打"><img class="cover" src="/img/4.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="title">项目Redis缓存优化知识点拷打</div></div></a></div><div><a href="/2025/03/05/%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B8%83%E5%BC%8FSession%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目分布式Session知识点拷打"><img class="cover" src="/img/10.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="title">项目分布式Session知识点拷打</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">怪陆离辛</div><div class="author-info__description">Choose what you love</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gllxgllx"><i class="fab fa-github"></i><span>关注</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://space.bilibili.com/87425918" target="_blank" title="bilibili"><i class="iconfont icon-icon_bilibili"></i></a><a class="social-icon" href="https://wpa.qq.com/msgrd?v=3&amp;uin=202555941&amp;site=qqq&amp;menu=yes" target="_blank" title="qq"><i class="iconfont icon-QQ1"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">转载内容仅供参考和学习</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">一、项目概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%8A%80%E6%9C%AF%E7%82%B9%E6%8B%86%E8%A7%A3%E4%B8%8E%E8%BF%BD%E9%97%AE%E9%A2%84%E6%B5%8B"><span class="toc-number">2.</span> <span class="toc-text">二、技术点拆解与追问预测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%99%BB%E5%BD%95%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%EF%BC%88JWT-ThreadLocal%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">1. 登录与身份验证（JWT + ThreadLocal）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%EF%BC%88Redis-Lua%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2. 分布式锁（Redis + Lua）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Redis%E7%BC%93%E5%AD%98%EF%BC%88%E8%8F%9C%E5%93%81%E7%BC%93%E5%AD%98-%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">3. Redis缓存（菜品缓存 + 内存优化）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-WebSocket%E5%AE%9E%E6%97%B6%E9%80%9A%E4%BF%A1%EF%BC%88%E6%9D%A5%E5%8D%95%E6%8F%90%E9%86%92-x2F-%E5%82%AC%E5%8D%95%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">4. WebSocket实时通信（来单提醒&#x2F;催单）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Spring-Task%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%EF%BC%88%E8%AE%A2%E5%8D%95%E8%B6%85%E6%97%B6%E5%8F%96%E6%B6%88%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text">5. Spring Task定时任务（订单超时取消）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E5%88%86%E5%B8%83%E5%BC%8FSession%EF%BC%88Redis-Hash%EF%BC%89"><span class="toc-number">2.6.</span> <span class="toc-text">6. 分布式Session（Redis + Hash）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%A1%B9%E7%9B%AE%E6%89%A9%E5%B1%95%E9%97%AE%E9%A2%98%E9%A2%84%E6%B5%8B"><span class="toc-number">3.</span> <span class="toc-text">三、项目扩展问题预测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%9B%9E%E7%AD%94%E6%8A%80%E5%B7%A7"><span class="toc-number">4.</span> <span class="toc-text">四、回答技巧</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/03/05/%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B8%83%E5%BC%8FSession%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目分布式Session知识点拷打"><img src="/img/10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="项目分布式Session知识点拷打"/></a><div class="content"><a class="title" href="/2025/03/05/%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B8%83%E5%BC%8FSession%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目分布式Session知识点拷打">项目分布式Session知识点拷打</a><time datetime="2025-03-05T15:02:58.000Z" title="发表于 2025-03-05 23:02:58">2025-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/05/%E9%A1%B9%E7%9B%AESpring-Task%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目Spring Task知识点拷打"><img src="/img/12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="项目Spring Task知识点拷打"/></a><div class="content"><a class="title" href="/2025/03/05/%E9%A1%B9%E7%9B%AESpring-Task%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目Spring Task知识点拷打">项目Spring Task知识点拷打</a><time datetime="2025-03-05T15:01:03.000Z" title="发表于 2025-03-05 23:01:03">2025-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/05/%E9%A1%B9%E7%9B%AEwebsocket%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目websocket知识点拷打"><img src="/img/6.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="项目websocket知识点拷打"/></a><div class="content"><a class="title" href="/2025/03/05/%E9%A1%B9%E7%9B%AEwebsocket%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目websocket知识点拷打">项目websocket知识点拷打</a><time datetime="2025-03-05T14:41:46.000Z" title="发表于 2025-03-05 22:41:46">2025-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/05/%E9%A1%B9%E7%9B%AERedis%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目Redis缓存优化知识点拷打"><img src="/img/4.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="项目Redis缓存优化知识点拷打"/></a><div class="content"><a class="title" href="/2025/03/05/%E9%A1%B9%E7%9B%AERedis%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目Redis缓存优化知识点拷打">项目Redis缓存优化知识点拷打</a><time datetime="2025-03-05T14:39:20.000Z" title="发表于 2025-03-05 22:39:20">2025-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/05/%E9%A1%B9%E7%9B%AERedis-Lua%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目Redis+Lua知识点拷打"><img src="/img/12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="项目Redis+Lua知识点拷打"/></a><div class="content"><a class="title" href="/2025/03/05/%E9%A1%B9%E7%9B%AERedis-Lua%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目Redis+Lua知识点拷打">项目Redis+Lua知识点拷打</a><time datetime="2025-03-05T14:33:19.000Z" title="发表于 2025-03-05 22:33:19">2025-03-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By 怪陆离辛</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">The exploration is endless</div></div><div class="container" id="jsi-flying-fish-container"><script src="js/fish.js"></script></div><style>   @media only screen and (max-width: 767px){
+   #sidebar_search_box input[type=text]{width:calc(100% - 24px)}
+}</style></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://gllxtwikoo.zeabur.app',
+      region: 'ap-beijing',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://gllxtwikoo.zeabur.app',
+      region: 'ap-beijing',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/gh/xiabo2/CDN@latest/fish.js"></script><script src="/js/sakura.js"></script><script src="/js/xxx.js"></script><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></body></html>
