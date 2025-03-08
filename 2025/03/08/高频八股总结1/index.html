@@ -1,0 +1,822 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>高频八股总结1 | 格 致</title><meta name="author" content="怪陆离辛"><meta name="copyright" content="怪陆离辛"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="线程池的原理，核心线程与非核心线程的区别？线程池是一种多线程处理形式，其核心思想是预先创建一定数量的线程，这些线程存放在一个“池”里，当有任务提交时，就从池中选取一个空闲线程来执行任务。执行完毕后，线程并不会销毁，而是回到池中等待下一次的任务。线程池的好处在于减少在创建和销毁线程上所花的时间和资源消耗，提高了程序响应速度和并发量。 线程池的原理 任务提交：当有任务提交到线程池时，线程池会首先检查核">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高频八股总结1">
+<meta property="og:url" content="http://example.com/2025/03/08/%E9%AB%98%E9%A2%91%E5%85%AB%E8%82%A1%E6%80%BB%E7%BB%931/index.html">
+<meta property="og:site_name" content="格 致">
+<meta property="og:description" content="线程池的原理，核心线程与非核心线程的区别？线程池是一种多线程处理形式，其核心思想是预先创建一定数量的线程，这些线程存放在一个“池”里，当有任务提交时，就从池中选取一个空闲线程来执行任务。执行完毕后，线程并不会销毁，而是回到池中等待下一次的任务。线程池的好处在于减少在创建和销毁线程上所花的时间和资源消耗，提高了程序响应速度和并发量。 线程池的原理 任务提交：当有任务提交到线程池时，线程池会首先检查核">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/12.png">
+<meta property="article:published_time" content="2025-03-08T07:44:33.000Z">
+<meta property="article:modified_time" content="2025-03-08T07:45:19.506Z">
+<meta property="article:author" content="怪陆离辛">
+<meta property="article:tag" content="春招">
+<meta property="article:tag" content="八股">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/12.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/03/08/%E9%AB%98%E9%A2%91%E5%85%AB%E8%82%A1%E6%80%BB%E7%BB%931/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '高频八股总结1',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-03-08 15:45:19'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><link rel="stylesheet" href="/css/xxx.css"><link rel="stylesheet" href="/css/iconfont.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zyoushuo/Blog@latest/hexo/css/loading_style_1.css" ><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zyoushuo/Blog@latest/hexo/css/loading_style_2.css" ><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="wizard-scene"><div class="wizard-objects"><div class="wizard-square"></div><div class="wizard-circle"></div><div class="wizard-triangle"></div></div><div class="wizard"><div class="wizard-body"></div><div class="wizard-right-arm"><div class="wizard-right-hand"></div></div><div class="wizard-left-arm"><div class="wizard-left-hand"></div></div><div class="wizard-head"><div class="wizard-beard"></div><div class="wizard-face"><div class="wizard-adds"></div></div><div class="wizard-hat"><div class="wizard-hat-of-the-hat"></div><div class="wizard-four-point-star --first"></div><div class="wizard-four-point-star --second"></div><div class="wizard-four-point-star --third"></div></div></div></div></div></div><script async="async"> var preloader = {
+   endLoading: () => {
+     document.body.style.overflow = 'auto';
+     document.getElementById('loading-box').classList.add("loaded")
+   },
+   initLoading: () => {
+     document.body.style.overflow = '';
+     document.getElementById('loading-box').classList.remove("loaded")
+
+   }
+ }
+setTimeout(function(){preloader.endLoading();}, 3000);</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">38</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-braille"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fa fa-images"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fa fa-beer"></i><span> 追番</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-sitemap"></i><span> 相关</span></a></li><li><a class="site-page child" href="/myself/"><i class="fa-fw fa fa-id-card"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/timeline/"><i class="fa-fw fa fa-bell"></i><span> 日志</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/12.png')"><nav id="nav"><span id="blog-info"><a href="/" title="格 致"><span class="site-name">格 致</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-braille"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fa fa-images"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fa fa-beer"></i><span> 追番</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-sitemap"></i><span> 相关</span></a></li><li><a class="site-page child" href="/myself/"><i class="fa-fw fa fa-id-card"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/timeline/"><i class="fa-fw fa fa-bell"></i><span> 日志</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">高频八股总结1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-08T07:44:33.000Z" title="发表于 2025-03-08 15:44:33">2025-03-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-08T07:45:19.506Z" title="更新于 2025-03-08 15:45:19">2025-03-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">10.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>35分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="高频八股总结1"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="线程池的原理，核心线程与非核心线程的区别？"><a href="#线程池的原理，核心线程与非核心线程的区别？" class="headerlink" title="线程池的原理，核心线程与非核心线程的区别？"></a>线程池的原理，核心线程与非核心线程的区别？</h1><p>线程池是一种多线程处理形式，其核心思想是预先创建一定数量的线程，这些线程存放在一个“池”里，当有任务提交时，就从池中选取一个空闲线程来执行任务。执行完毕后，线程并不会销毁，而是回到池中等待下一次的任务。线程池的好处在于减少在创建和销毁线程上所花的时间和资源消耗，提高了程序响应速度和并发量。</p>
+<h3 id="线程池的原理"><a href="#线程池的原理" class="headerlink" title="线程池的原理"></a>线程池的原理</h3><ol>
+<li><strong>任务提交</strong>：当有任务提交到线程池时，线程池会首先检查核心线程是否都在执行任务。如果核心线程有空闲，则直接使用核心线程执行任务；如果核心线程都在忙，则将任务放入任务队列中等待。</li>
+<li><strong>任务队列</strong>：如果任务队列未满，任务会被放入队列中等待执行；如果任务队列已满，线程池会检查当前线程数是否小于最大线程数。如果小于，则创建非核心线程执行任务；如果已达到最大线程数，则根据拒绝策略处理任务。</li>
+<li><strong>线程复用</strong>：线程执行完任务后，会继续从任务队列中获取新的任务执行，而不是销毁。这样可以避免频繁创建和销毁线程的开销。</li>
+<li><strong>线程回收</strong>：非核心线程在空闲超过一定时间（<code>keepAliveTime</code>）后会被回收，而核心线程默认会一直存活，除非设置了<code>allowCoreThreadTimeOut</code>为<code>true</code>，此时核心线程也会在空闲超过<code>keepAliveTime</code>后被回收。</li>
+</ol>
+<h3 id="核心线程与非核心线程的区别"><a href="#核心线程与非核心线程的区别" class="headerlink" title="核心线程与非核心线程的区别"></a>核心线程与非核心线程的区别</h3><ol>
+<li><strong>生命周期</strong>：<br>• <strong>核心线程</strong>：默认情况下，核心线程会一直存活，即使空闲也不会被回收，除非设置了<code>allowCoreThreadTimeOut</code>为<code>true</code>。<br>• <strong>非核心线程</strong>：非核心线程在空闲超过<code>keepAliveTime</code>后会被回收，以节省资源。</li>
+<li><strong>创建时机</strong>：<br>• <strong>核心线程</strong>：在线程池初始化时或任务提交时创建，数量不超过<code>corePoolSize</code>。<br>• <strong>非核心线程</strong>：当任务队列已满且当前线程数小于<code>maximumPoolSize</code>时创建，用于处理突发任务。</li>
+<li><strong>数量限制</strong>：<br>• <strong>核心线程</strong>：数量由<code>corePoolSize</code>决定，是线程池的基础线程数。<br>• <strong>非核心线程</strong>：数量由<code>maximumPoolSize - corePoolSize</code>决定，用于应对任务高峰。</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>线程池通过核心线程和非核心线程的配合，实现了线程的复用和资源的合理利用。核心线程是线程池的基础，用于处理常规任务；非核心线程则用于应对突发任务，空闲时会被回收以节省资源。</p>
+<h1 id="非核心线程池销毁的具体实现过程？"><a href="#非核心线程池销毁的具体实现过程？" class="headerlink" title="非核心线程池销毁的具体实现过程？"></a>非核心线程池销毁的具体实现过程？</h1><p>非核心线程池的销毁过程主要依赖于线程池的配置和任务队列的状态。以下是具体的实现过程：</p>
+<ol>
+<li><p><strong>任务获取与超时机制</strong>：<br>• 非核心线程通过<code>getTask()</code>方法从任务队列中获取任务。如果线程池配置了<code>allowCoreThreadTimeOut</code>为<code>true</code>，则核心线程也会参与超时机制。<br>• 在<code>getTask()</code>方法中，非核心线程会调用<code>workQueue.poll(keepAliveTime, TimeUnit.NANOSECONDS)</code>，这是一个超时等待的方法。如果在<code>keepAliveTime</code>时间内没有获取到任务，<code>poll()</code>方法会返回<code>null</code>。</p>
+</li>
+<li><p><strong>线程回收条件</strong>：<br>• 当<code>getTask()</code>返回<code>null</code>时，表示当前线程已经空闲超过<code>keepAliveTime</code>时间，且没有新任务需要处理。<br>• 线程池会通过<code>compareAndDecrementWorkerCount(c)</code>方法减少工作线程数。如果成功，当前线程会被标记为可回收。</p>
+</li>
+<li><p><strong>线程销毁</strong>：<br>• 在<code>runWorker()</code>方法中，当<code>getTask()</code>返回<code>null</code>时，线程会退出<code>while</code>循环，并进入<code>processWorkerExit(w, completedAbruptly)</code>方法。<br>• <code>processWorkerExit()</code>方法会从线程池的<code>workers</code>集合中移除当前线程，并调用<code>Thread.interrupt()</code>方法中断线程，最终线程会被JVM回收。</p>
+</li>
+<li><p><strong>特殊情况处理</strong>：<br>• 如果线程池调用了<code>shutdown()</code>方法，所有空闲线程（包括非核心线程）都会收到中断信号，并在<code>getTask()</code>中捕获中断异常，最终进入<code>processWorkerExit()</code>方法被销毁。<br>• 如果线程池状态为<code>STOP</code>、<code>TIDYING</code>或<code>TERMINATED</code>，所有线程（无论是否空闲）都会被强制销毁。</p>
+</li>
+</ol>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>非核心线程的销毁过程主要包括：</p>
+<ol>
+<li>通过<code>getTask()</code>方法检测线程是否空闲超时。</li>
+<li>如果超时，减少工作线程数并标记线程为可回收。</li>
+<li>在<code>processWorkerExit()</code>方法中移除线程并中断其执行，最终由JVM回收。</li>
+</ol>
+<p>这一过程确保了线程池在任务量减少时能够动态回收多余的线程，避免资源浪费。</p>
+<p>在创建线程池时，你不仅负责指定核心线程池的大小，还需要明确如何管理非核心线程。具体来说，线程池的管理包括核心线程和非核心线程的创建、销毁以及任务调度等。以下是关键点：</p>
+<ol>
+<li><p><strong>核心线程与非核心线程的区别</strong>：<br>• <strong>核心线程</strong>：默认情况下，核心线程会一直存活，即使没有任务执行，除非设置了<code>allowCoreThreadTimeOut</code>为<code>true</code>，此时核心线程在空闲超过<code>keepAliveTime</code>后也会被销毁。<br>• <strong>非核心线程</strong>：当任务队列已满且当前线程数小于最大线程数时，线程池会创建非核心线程来处理任务。非核心线程在空闲超过<code>keepAliveTime</code>后会被销毁。</p>
+</li>
+<li><p><strong>创建线程池时的参数</strong>：<br>• **<code>corePoolSize</code>**：指定核心线程的数量。<br>• **<code>maximumPoolSize</code>**：指定线程池中允许的最大线程数（包括核心线程和非核心线程）。<br>• **<code>keepAliveTime</code>**：指定非核心线程空闲时的存活时间。<br>• **<code>unit</code>**：<code>keepAliveTime</code>的时间单位。<br>• **<code>workQueue</code>**：任务队列，用于存放待执行的任务。<br>• **<code>threadFactory</code>**：用于创建新线程的工厂。<br>• **<code>handler</code>**：当任务队列已满且线程数达到最大线程数时，用于处理新提交任务的拒绝策略。</p>
+</li>
+<li><p><strong>非核心线程的管理</strong>：<br>• 非核心线程的创建和销毁由线程池自动管理。当任务队列已满且当前线程数小于<code>maximumPoolSize</code>时，线程池会创建非核心线程；当非核心线程空闲超过<code>keepAliveTime</code>时，线程池会销毁这些线程。<br>• 你不需要手动管理非核心线程的生命周期，线程池会根据配置自动处理。</p>
+</li>
+<li><p><strong>总结</strong>：<br>• 你负责指定核心线程池的大小（<code>corePoolSize</code>）和最大线程数（<code>maximumPoolSize</code>），并设置非核心线程的存活时间（<code>keepAliveTime</code>）。<br>• 线程池会自动管理非核心线程的创建和销毁，你无需手动干预。</p>
+</li>
+</ol>
+<p>因此，创建线程池时，你不仅负责核心线程池的配置，还需要通过参数明确非核心线程的管理方式。</p>
+<h1 id="如何保证线程安全？"><a href="#如何保证线程安全？" class="headerlink" title="如何保证线程安全？"></a>如何保证线程安全？</h1><p>保证线程安全是多线程编程中的核心问题，目的是确保多个线程并发访问共享资源时，程序能够正确执行，不会出现数据竞争或不一致的情况。以下是实现线程安全的常用方法：</p>
+<h3 id="1-使用同步机制"><a href="#1-使用同步机制" class="headerlink" title="1. 使用同步机制"></a>1. <strong>使用同步机制</strong></h3><p>   • <strong><code>synchronized</code>关键字</strong>：通过修饰方法或代码块，确保同一时间只有一个线程可以访问共享资源。<br>     <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Counter</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">increment</span><span class="params">()</span> &#123;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>   • <strong>同步块</strong>：只锁定需要同步的部分，提高效率。<br>     <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Counter</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">increment</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="built_in">this</span>) &#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-使用锁"><a href="#2-使用锁" class="headerlink" title="2. 使用锁"></a>2. <strong>使用锁</strong></h3><p>   • **<code>ReentrantLock</code>**：显式锁，提供更灵活的锁定机制。<br>     <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Counter</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">ReentrantLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">increment</span><span class="params">()</span> &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-使用原子变量"><a href="#3-使用原子变量" class="headerlink" title="3. 使用原子变量"></a>3. <strong>使用原子变量</strong></h3><p>   • <strong><code>AtomicInteger</code>等原子类</strong>：通过CAS（Compare-And-Swap）操作实现无锁线程安全。<br>     <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Counter</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">AtomicInteger</span> <span class="variable">count</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">increment</span><span class="params">()</span> &#123;</span><br><span class="line">        count.incrementAndGet();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-使用线程安全的数据结构"><a href="#4-使用线程安全的数据结构" class="headerlink" title="4. 使用线程安全的数据结构"></a>4. <strong>使用线程安全的数据结构</strong></h3><p>   • <strong><code>ConcurrentHashMap</code>、<code>CopyOnWriteArrayList</code>等</strong>：这些数据结构内部已经实现了线程安全，无需额外同步。<br>     <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.ConcurrentHashMap;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> ConcurrentHashMap&lt;String, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String key, <span class="type">int</span> value)</span> &#123;</span><br><span class="line">        map.put(key, value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="5-避免共享状态"><a href="#5-避免共享状态" class="headerlink" title="5. 避免共享状态"></a>5. <strong>避免共享状态</strong></h3><p>   • <strong>使用局部变量</strong>：局部变量是线程私有的，不会引发线程安全问题。<br>     <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">localVar</span> <span class="operator">=</span> <span class="number">0</span>; <span class="comment">// 线程安全</span></span><br><span class="line">        localVar++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="6-使用不可变对象"><a href="#6-使用不可变对象" class="headerlink" title="6. 使用不可变对象"></a>6. <strong>使用不可变对象</strong></h3><p>   • <strong>不可变对象</strong>：如<code>String</code>、<code>Integer</code>等，它们的状态无法被修改，因此是线程安全的。<br>     <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">immutableString</span> <span class="operator">=</span> <span class="string">&quot;Hello&quot;</span>; <span class="comment">// 线程安全</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="7-使用volatile关键字"><a href="#7-使用volatile关键字" class="headerlink" title="7. 使用volatile关键字"></a>7. <strong>使用<code>volatile</code>关键字</strong></h3><p>   • **<code>volatile</code>**：保证变量的可见性，但不保证原子性。适用于状态标志等场景。<br>     <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">false</span>; <span class="comment">// 线程安全</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="8-使用线程安全的库或框架"><a href="#8-使用线程安全的库或框架" class="headerlink" title="8. 使用线程安全的库或框架"></a>8. <strong>使用线程安全的库或框架</strong></h3><p>   • <strong><code>java.util.concurrent</code>包</strong>：提供了丰富的线程安全工具，如<code>CountDownLatch</code>、<code>Semaphore</code>等。</p>
+<h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><p>实现线程安全的核心在于<strong>控制对共享资源的访问</strong>，确保多个线程不会同时修改同一数据。具体方法包括同步机制、锁、原子变量、线程安全的数据结构等。选择合适的方法需要根据具体场景和性能需求进行权衡。</p>
+<h1 id="synchronized实现的逻辑？"><a href="#synchronized实现的逻辑？" class="headerlink" title="synchronized实现的逻辑？"></a>synchronized实现的逻辑？</h1><p><code>synchronized (this)</code> 是 Java 中用于实现线程同步的一种机制，它的作用是<strong>获取当前对象（<code>this</code>）的锁</strong>，确保在同一时间内只有一个线程可以执行被 <code>synchronized (this)</code> 修饰的代码块或方法。以下是它的具体含义和作用：</p>
+<ol>
+<li><p><strong>锁定当前对象</strong>：<br>• <code>synchronized (this)</code> 中的 <code>this</code> 指的是当前实例对象。当一个线程进入 <code>synchronized (this)</code> 代码块时，它会尝试获取当前对象的锁。如果锁被其他线程持有，当前线程会阻塞，直到锁被释放。</p>
+</li>
+<li><p><strong>线程互斥</strong>：<br>• 如果多个线程同时访问同一个对象的 <code>synchronized (this)</code> 代码块，只有一个线程可以执行，其他线程必须等待当前线程执行完毕并释放锁后才能继续执行。这确保了线程间的互斥访问，避免了数据竞争和不一致的问题。</p>
+</li>
+<li><p><strong>作用范围</strong>：<br>• <code>synchronized (this)</code> 只锁定当前对象的同步代码块，其他非 <code>synchronized</code> 代码块或方法仍然可以被其他线程并发访问。</p>
+</li>
+<li><p><strong>锁的释放</strong>：<br>• 当线程执行完 <code>synchronized (this)</code> 代码块后，会自动释放锁，其他等待的线程可以获取锁并执行代码。</p>
+</li>
+</ol>
+<h3 id="示例代码："><a href="#示例代码：" class="headerlink" title="示例代码："></a>示例代码：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="built_in">this</span>) &#123;</span><br><span class="line">            <span class="comment">// 同步代码块，同一时间只有一个线程可以执行</span></span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">&quot; is running&quot;</span>);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>); <span class="comment">// 模拟任务执行</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Example</span> <span class="variable">example</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Example</span>();</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">t1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; example.method(), <span class="string">&quot;Thread-1&quot;</span>);</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">t2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; example.method(), <span class="string">&quot;Thread-2&quot;</span>);</span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，<code>Thread-1</code> 和 <code>Thread-2</code> 会竞争 <code>synchronized (this)</code> 锁，同一时间只有一个线程可以执行 <code>method()</code> 中的代码块。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p><code>synchronized (this)</code> 是一种简单而有效的线程同步机制，它通过锁定当前对象来确保线程安全。适用于多线程环境下对共享资源的互斥访问。</p>
+<h1 id="volatile关键字有什么功能"><a href="#volatile关键字有什么功能" class="headerlink" title="volatile关键字有什么功能"></a>volatile关键字有什么功能</h1><p><code>volatile</code> 是 Java 中的一个关键字，用于修饰变量，主要功能是保证变量的<strong>可见性</strong>和<strong>禁止指令重排序</strong>，但它<strong>不保证原子性</strong>。以下是 <code>volatile</code> 关键字的具体功能：</p>
+<h3 id="1-保证可见性"><a href="#1-保证可见性" class="headerlink" title="1. 保证可见性"></a>1. <strong>保证可见性</strong></h3><p>   • 在多线程环境下，如果一个线程修改了 <code>volatile</code> 变量的值，这个新值会立即被写回到主内存，而不是仅仅保存在线程的本地缓存中。其他线程在读取这个变量时，会直接从主内存中获取最新的值，而不是使用本地缓存中的旧值。这样可以避免线程间的数据不一致问题。</p>
+<h3 id="2-禁止指令重排序"><a href="#2-禁止指令重排序" class="headerlink" title="2. 禁止指令重排序"></a>2. <strong>禁止指令重排序</strong></h3><p>   • 编译器和处理器为了提高性能，可能会对指令进行重排序。<code>volatile</code> 关键字通过插入<strong>内存屏障</strong>（Memory Barrier）来禁止指令重排序，确保代码的执行顺序符合预期。例如，在 <code>volatile</code> 写操作前后会插入 <code>StoreStore</code> 和 <code>StoreLoad</code> 屏障，而在 <code>volatile</code> 读操作后会插入 <code>LoadLoad</code> 和 <code>LoadStore</code> 屏障。</p>
+<h3 id="3-不保证原子性"><a href="#3-不保证原子性" class="headerlink" title="3. 不保证原子性"></a>3. <strong>不保证原子性</strong></h3><p>   • <code>volatile</code> 只能保证单个读&#x2F;写操作的原子性，但不能保证复合操作（如 <code>i++</code>）的原子性。例如，<code>count++</code> 操作实际上分为读取、修改、写入三个步骤，<code>volatile</code> 无法保证这三个步骤的原子性。如果需要原子性操作，可以使用 <code>synchronized</code> 或 <code>java.util.concurrent.atomic</code> 包中的原子类（如 <code>AtomicInteger</code>）。</p>
+<h3 id="4-适用场景"><a href="#4-适用场景" class="headerlink" title="4. 适用场景"></a>4. <strong>适用场景</strong></h3><p>   • <strong>状态标志</strong>：用于标记某个状态（如任务是否完成），确保多个线程能够及时感知状态的变化。<br>   • <strong>双重检查锁定（Double-Checked Locking）</strong>：在单例模式中，使用 <code>volatile</code> 修饰单例实例变量，避免指令重排序导致的问题。<br>   • <strong>轻量级同步机制</strong>：在不需要复杂同步逻辑的场景下，<code>volatile</code> 比 <code>synchronized</code> 更轻量。</p>
+<h3 id="5-不适用场景"><a href="#5-不适用场景" class="headerlink" title="5. 不适用场景"></a>5. <strong>不适用场景</strong></h3><p>   • <strong>复合操作</strong>：如 <code>i++</code>、<code>i = i + 1</code> 等操作，<code>volatile</code> 无法保证原子性。<br>   • <strong>依赖当前值的写入操作</strong>：如果变量的写入操作依赖于当前值（如 <code>count = count + 1</code>），<code>volatile</code> 无法保证线程安全。</p>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">VolatileExample</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">startTask</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>); <span class="comment">// 模拟耗时操作</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            flag = <span class="literal">true</span>; <span class="comment">// 修改 volatile 变量</span></span><br><span class="line">            System.out.println(<span class="string">&quot;Flag has been set to true.&quot;</span>);</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">monitorTask</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">while</span> (!flag) &#123; <span class="comment">// 读取 volatile 变量</span></span><br><span class="line">                <span class="comment">// 等待 flag 变为 true</span></span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">&quot;Flag is now true. Task can proceed.&quot;</span>);</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">VolatileExample</span> <span class="variable">example</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">VolatileExample</span>();</span><br><span class="line">        example.startTask();</span><br><span class="line">        example.monitorTask();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，<code>flag</code> 被声明为 <code>volatile</code>，确保了 <code>monitorTask()</code> 方法能够及时感知到 <code>flag</code> 的变化，从而正确退出循环。</p>
+<h3 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h3><p><code>volatile</code> 关键字是一种轻量级的同步机制，适用于确保变量的可见性和禁止指令重排序的场景，但不适用于需要原子性操作的场景。在多线程编程中，合理使用 <code>volatile</code> 可以提高程序的正确性和性能。</p>
+<h1 id="如果这里没使用volatile会发生什么"><a href="#如果这里没使用volatile会发生什么" class="headerlink" title="如果这里没使用volatile会发生什么"></a>如果这里没使用volatile会发生什么</h1><p>如果没有使用 <code>volatile</code> 关键字，可能会导致以下问题：</p>
+<ol>
+<li><p><strong>可见性问题</strong>：<br>• 在多线程环境下，线程可能会从自己的本地缓存中读取变量的值，而不是从主内存中获取最新的值。即使一个线程修改了变量的值，其他线程可能无法立即看到这个修改，导致数据不一致的问题。</p>
+</li>
+<li><p><strong>指令重排序问题</strong>：<br>• 编译器和处理器可能会对指令进行重排序以优化性能。如果没有 <code>volatile</code> 关键字，这种重排序可能会导致程序的行为与预期不符。例如，在双重检查锁定（DCL）的单例模式中，如果没有 <code>volatile</code>，可能会导致其他线程获取到一个未完全初始化的对象。</p>
+</li>
+<li><p><strong>原子性问题</strong>：<br>• <code>volatile</code> 只能保证单个读&#x2F;写操作的原子性，但不能保证复合操作（如 <code>i++</code>）的原子性。如果没有 <code>volatile</code>，复合操作可能会被其他线程打断，导致数据不一致。</p>
+</li>
+</ol>
+<h3 id="示例场景"><a href="#示例场景" class="headerlink" title="示例场景"></a>示例场景</h3><p>在双重检查锁定的单例模式中，如果没有使用 <code>volatile</code>，可能会出现以下情况：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">                    instance = <span class="keyword">new</span> <span class="title class_">Singleton</span>(); <span class="comment">// 可能发生指令重排序</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，<code>instance = new Singleton();</code> 这行代码可能会被重排序，导致其他线程获取到一个未完全初始化的 <code>Singleton</code> 对象。使用 <code>volatile</code> 可以禁止这种重排序，确保对象的完整初始化。</p>
+<h3 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h3><p>如果没有使用 <code>volatile</code>，可能会导致可见性问题、指令重排序问题和原子性问题。在多线程环境下，合理使用 <code>volatile</code> 可以避免这些问题，确保程序的正确性和一致性。</p>
+<h1 id="介绍mysql的事务隔离级别"><a href="#介绍mysql的事务隔离级别" class="headerlink" title="介绍mysql的事务隔离级别"></a>介绍mysql的事务隔离级别</h1><p>MySQL 的事务隔离级别定义了事务在并发执行时，如何控制数据的可见性和一致性。MySQL 支持四种标准的事务隔离级别，从低到高分别是：<strong>读未提交（Read Uncommitted）</strong>、<strong>读已提交（Read Committed）</strong>、<strong>可重复读（Repeatable Read）</strong> 和 <strong>串行化（Serializable）</strong>。以下是每种隔离级别的详细介绍：</p>
+<h3 id="1-读未提交（Read-Uncommitted）"><a href="#1-读未提交（Read-Uncommitted）" class="headerlink" title="1. 读未提交（Read Uncommitted）"></a>1. <strong>读未提交（Read Uncommitted）</strong></h3><p>   • <strong>特点</strong>：允许事务读取其他事务未提交的数据。<br>   • <strong>问题</strong>：可能导致<strong>脏读</strong>（Dirty Read），即读取到未提交的数据，如果该事务回滚，读取的数据就是无效的。<br>   • <strong>适用场景</strong>：对数据一致性要求极低的场景，如临时统计或缓存预热。<br>   • <strong>设置方式</strong>：<br>     <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SET</span> SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-读已提交（Read-Committed）"><a href="#2-读已提交（Read-Committed）" class="headerlink" title="2. 读已提交（Read Committed）"></a>2. <strong>读已提交（Read Committed）</strong></h3><p>   • <strong>特点</strong>：只允许读取已提交的数据，避免了脏读。<br>   • <strong>问题</strong>：可能导致<strong>不可重复读</strong>（Non-Repeatable Read），即同一事务内多次读取同一数据，结果可能不一致。<br>   • <strong>适用场景</strong>：大多数业务场景，如电商订单查询。<br>   • <strong>设置方式</strong>：<br>     <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SET</span> SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-可重复读（Repeatable-Read）"><a href="#3-可重复读（Repeatable-Read）" class="headerlink" title="3. 可重复读（Repeatable Read）"></a>3. <strong>可重复读（Repeatable Read）</strong></h3><p>   • <strong>特点</strong>：确保同一事务内多次读取同一数据的结果一致，避免了脏读和不可重复读。<br>   • <strong>问题</strong>：可能导致<strong>幻读</strong>（Phantom Read），即同一事务内多次查询同一范围的数据，结果集数量可能变化（如新增或删除记录）。<br>   • <strong>适用场景</strong>：对数据一致性要求较高的场景，如金融账户余额或库存扣减。<br>   • <strong>默认隔离级别</strong>：MySQL 的默认隔离级别。<br>   • <strong>设置方式</strong>：<br>     <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SET</span> SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-串行化（Serializable）"><a href="#4-串行化（Serializable）" class="headerlink" title="4. 串行化（Serializable）"></a>4. <strong>串行化（Serializable）</strong></h3><p>   • <strong>特点</strong>：最高的隔离级别，强制事务串行执行，避免了脏读、不可重复读和幻读。<br>   • <strong>问题</strong>：性能最差，因为事务需要排队执行，可能导致大量的锁等待和死锁。<br>   • <strong>适用场景</strong>：对数据一致性要求极高的场景，如金融系统。<br>   • <strong>设置方式</strong>：<br>     <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SET</span> SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;</span><br></pre></td></tr></table></figure></p>
+<h3 id="总结-5"><a href="#总结-5" class="headerlink" title="总结"></a>总结</h3><p>• <strong>隔离级别越高</strong>，数据一致性越强，但<strong>并发性能越低</strong>。<br>• <strong>隔离级别越低</strong>，并发性能越高，但<strong>数据一致性越弱</strong>。<br>• MySQL 默认的隔离级别是 <strong>可重复读（Repeatable Read）</strong>，因为它在数据一致性和性能之间提供了较好的平衡。</p>
+<p>开发者可以根据业务需求选择合适的隔离级别，以在数据一致性和系统性能之间找到最佳平衡点。</p>
+<h1 id="可重复读实现的原理？"><a href="#可重复读实现的原理？" class="headerlink" title="可重复读实现的原理？"></a>可重复读实现的原理？</h1><p>MySQL 的 <strong>可重复读（Repeatable Read）</strong> 隔离级别是通过 <strong>多版本并发控制（MVCC, Multi-Version Concurrency Control）</strong> 和 <strong>锁定机制</strong> 来实现的。以下是其实现原理的详细说明：</p>
+<hr>
+<h3 id="1-多版本并发控制（MVCC）"><a href="#1-多版本并发控制（MVCC）" class="headerlink" title="1. 多版本并发控制（MVCC）"></a>1. <strong>多版本并发控制（MVCC）</strong></h3><p>MVCC 是 MySQL 实现可重复读的核心机制。它的核心思想是：<br>• 为每条记录维护多个版本，每个版本都有一个创建时间（事务 ID）和删除时间（事务 ID）。<br>• 在事务执行期间，只能看到在该事务开始之前已经提交的数据版本，而看不到其他事务未提交或之后提交的数据。</p>
+<h4 id="具体实现："><a href="#具体实现：" class="headerlink" title="具体实现："></a>具体实现：</h4><p>• <strong>Read View</strong>：每个事务在开始时都会创建一个 <strong>Read View</strong>，记录当前活跃事务的 ID 列表。通过 Read View，事务可以判断哪些数据版本是可见的。<br>• <strong>Undo Log</strong>：MySQL 使用 <strong>Undo Log</strong> 来存储旧版本的数据。当事务需要读取数据时，如果当前版本不可见，MySQL 会通过 Undo Log 找到适合的旧版本。<br>• <strong>版本链</strong>：每条记录都有一个指针，指向其历史版本（通过 Undo Log 实现）。事务通过遍历版本链找到符合自己 Read View 的版本。</p>
+<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><p>假设事务 A 开始时，Read View 记录活跃事务为 [2, 3]。<br>• 如果事务 2 修改了某条记录，事务 A 会通过 Undo Log 找到事务 2 修改之前的版本。<br>• 如果事务 4 在事务 A 开始后修改了记录，事务 A 会忽略事务 4 的修改，因为事务 4 不在其 Read View 中。</p>
+<hr>
+<h3 id="2-锁定机制"><a href="#2-锁定机制" class="headerlink" title="2. 锁定机制"></a>2. <strong>锁定机制</strong></h3><p>虽然 MVCC 可以实现读操作的并发控制，但写操作仍然需要锁定机制来避免冲突。</p>
+<h4 id="具体实现：-1"><a href="#具体实现：-1" class="headerlink" title="具体实现："></a>具体实现：</h4><p>• <strong>行锁</strong>：在可重复读隔离级别下，MySQL 会对修改的行加 <strong>排他锁（X Lock）</strong>，防止其他事务同时修改同一行。<br>• <strong>间隙锁（Gap Lock）</strong>：为了防止幻读，MySQL 会对查询范围内的间隙加锁。例如，如果查询 <code>WHERE id BETWEEN 10 AND 20</code>，MySQL 会对 10 到 20 之间的间隙加锁，防止其他事务插入新数据。<br>• <strong>Next-Key Lock</strong>：MySQL 结合行锁和间隙锁，形成 <strong>Next-Key Lock</strong>，锁定行和其前后的间隙，进一步防止幻读。</p>
+<hr>
+<h3 id="3-可重复读的特点"><a href="#3-可重复读的特点" class="headerlink" title="3. 可重复读的特点"></a>3. <strong>可重复读的特点</strong></h3><p>• <strong>避免脏读</strong>：事务只能读取已提交的数据版本。<br>• <strong>避免不可重复读</strong>：事务在开始时创建一个 Read View，后续读取的数据版本不会改变。<br>• <strong>部分避免幻读</strong>：通过间隙锁和 Next-Key Lock，MySQL 可以在大多数情况下防止幻读，但在某些特殊场景下（如全表扫描）仍可能出现幻读。</p>
+<hr>
+<h3 id="4-示例"><a href="#4-示例" class="headerlink" title="4. 示例"></a>4. <strong>示例</strong></h3><p>假设有以下数据表 <code>users</code>：</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Alice</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Bob</td>
+</tr>
+</tbody></table>
+<h4 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h4><ol>
+<li>事务 A 开始，读取 <code>id = 1</code> 的记录，得到 <code>name = Alice</code>。</li>
+<li>事务 B 开始，将 <code>id = 1</code> 的 <code>name</code> 修改为 <code>Carol</code> 并提交。</li>
+<li>事务 A 再次读取 <code>id = 1</code> 的记录，仍然得到 <code>name = Alice</code>，因为事务 A 只能看到事务开始时的数据版本。</li>
+</ol>
+<hr>
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. <strong>总结</strong></h3><p>• <strong>MVCC</strong> 是可重复读的核心机制，通过 Read View 和 Undo Log 实现数据版本的可见性控制。<br>• <strong>锁定机制</strong>（行锁、间隙锁、Next-Key Lock）用于保证写操作的正确性，防止数据冲突和幻读。<br>• 可重复读隔离级别在大多数场景下可以保证事务的一致性和隔离性，但在极端情况下（如全表扫描）仍可能出现幻读。</p>
+<p>通过 MVCC 和锁定机制的结合，MySQL 实现了高效且一致的可重复读隔离级别。</p>
+<h1 id="B-树有什么特点和好处？"><a href="#B-树有什么特点和好处？" class="headerlink" title="B+树有什么特点和好处？"></a>B+树有什么特点和好处？</h1><p><strong>B+树</strong> 是一种常用的平衡树数据结构，广泛应用于数据库和文件系统中，用于高效地存储和检索数据。它的设计目标是优化磁盘 I&#x2F;O 操作，适合处理大规模数据。以下是 B+树的特点和好处：</p>
+<hr>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a><strong>特点</strong></h3><ol>
+<li><p><strong>多路平衡树</strong>：<br>• B+树是一种多路平衡树，每个节点可以有多个子节点（通常远大于 2），从而减少树的高度。<br>• 树的高度越低，查找路径越短，检索效率越高。</p>
+</li>
+<li><p><strong>内部节点与叶子节点分离</strong>：<br>• <strong>内部节点</strong>：只存储键值（key），用于导航。<br>• <strong>叶子节点</strong>：存储键值和实际数据（或指向数据的指针），并且所有叶子节点通过链表连接，支持范围查询。</p>
+</li>
+<li><p><strong>所有数据存储在叶子节点</strong>：<br>• 数据只存储在叶子节点中，内部节点仅用于索引，这使得 B+树的查找路径长度一致，查找效率稳定。</p>
+</li>
+<li><p><strong>叶子节点链表</strong>：<br>• 所有叶子节点通过双向链表连接，支持高效的范围查询和顺序访问。</p>
+</li>
+<li><p><strong>平衡性</strong>：<br>• B+树通过分裂和合并操作保持平衡，确保树的高度始终维持在较低水平。</p>
+</li>
+</ol>
+<hr>
+<h3 id="好处"><a href="#好处" class="headerlink" title="好处"></a><strong>好处</strong></h3><ol>
+<li><p><strong>高效的查找性能</strong>：<br>• 由于 B+树是多路平衡树，树的高度较低，查找时间复杂度为 (O(\log n))，适合处理大规模数据。<br>• 所有查找操作最终都会到达叶子节点，路径长度一致，性能稳定。</p>
+</li>
+<li><p><strong>适合磁盘存储</strong>：<br>• B+树的节点大小通常与磁盘块大小匹配，减少磁盘 I&#x2F;O 次数。<br>• 一次磁盘读取可以加载一个节点（包含多个键值），提高数据访问效率。</p>
+</li>
+<li><p><strong>支持高效的范围查询</strong>：<br>• 叶子节点通过链表连接，支持高效的范围查询（如 <code>WHERE id BETWEEN 10 AND 20</code>）。<br>• 顺序访问性能优异，适合遍历操作。</p>
+</li>
+<li><p><strong>支持高效的插入和删除</strong>：<br>• B+树通过分裂和合并操作保持平衡，插入和删除的时间复杂度为 (O(\log n))。<br>• 分裂和合并操作通常只影响局部节点，对整体性能影响较小。</p>
+</li>
+<li><p><strong>空间利用率高</strong>：<br>• B+树的节点可以存储多个键值，空间利用率较高，适合存储大规模数据。</p>
+</li>
+<li><p><strong>广泛的应用场景</strong>：<br>• 数据库索引（如 MySQL 的 InnoDB 引擎使用 B+树作为索引结构）。<br>• 文件系统（如 NTFS、ReiserFS 等）。<br>• 键值存储系统（如 LevelDB、RocksDB 等）。</p>
+</li>
+</ol>
+<hr>
+<h3 id="B-树-vs-B树"><a href="#B-树-vs-B树" class="headerlink" title="B+树 vs B树"></a><strong>B+树 vs B树</strong></h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>B+树</th>
+<th>B树</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据存储位置</td>
+<td>仅叶子节点存储数据</td>
+<td>所有节点都可以存储数据</td>
+</tr>
+<tr>
+<td>叶子节点链表</td>
+<td>支持，适合范围查询</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>查找性能</td>
+<td>稳定，路径长度一致</td>
+<td>不稳定，路径长度可能不一致</td>
+</tr>
+<tr>
+<td>适合场景</td>
+<td>数据库索引、文件系统</td>
+<td>较少使用</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="总结-6"><a href="#总结-6" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>B+树的特点和好处使其成为数据库和文件系统中广泛使用的数据结构。它通过多路平衡、叶子节点链表、高效的范围查询和适合磁盘存储的设计，提供了高效的查找、插入、删除和范围查询性能，特别适合处理大规模数据和高并发场景。</p>
+<h1 id="聚簇索引和非聚簇索引区别？"><a href="#聚簇索引和非聚簇索引区别？" class="headerlink" title="聚簇索引和非聚簇索引区别？"></a>聚簇索引和非聚簇索引区别？</h1><p><strong>聚簇索引（Clustered Index）</strong> 和 <strong>非聚簇索引（Non-Clustered Index）</strong> 是数据库中两种常见的索引类型，它们在存储方式和查询性能上有显著区别。以下是它们的详细对比：</p>
+<hr>
+<h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a><strong>1. 定义</strong></h3><p>• <strong>聚簇索引</strong>：<br>  • 聚簇索引决定了表中数据的物理存储顺序。一张表只能有一个聚簇索引，因为数据只能按照一种方式物理排序。<br>  • 在聚簇索引中，索引的叶子节点直接存储数据行。</p>
+<p>• <strong>非聚簇索引</strong>：<br>  • 非聚簇索引是独立于数据存储的索引结构，它的叶子节点存储的是指向数据行的指针（或主键值）。<br>  • 一张表可以有多个非聚簇索引。</p>
+<hr>
+<h3 id="2-存储方式"><a href="#2-存储方式" class="headerlink" title="2. 存储方式"></a><strong>2. 存储方式</strong></h3><p>• <strong>聚簇索引</strong>：<br>  • 数据行按照聚簇索引的键值顺序存储。<br>  • 索引的叶子节点就是数据页，存储实际的数据行。</p>
+<p>• <strong>非聚簇索引</strong>：<br>  • 数据行的存储顺序与索引无关。<br>  • 索引的叶子节点存储的是指向数据行的指针（或主键值），而不是数据本身。</p>
+<hr>
+<h3 id="3-性能"><a href="#3-性能" class="headerlink" title="3. 性能"></a><strong>3. 性能</strong></h3><p>• <strong>聚簇索引</strong>：<br>  • <strong>优点</strong>：<br>    ◦ 范围查询性能高，因为数据物理上连续存储。<br>    ◦ 对于主键查询，性能非常高，因为数据直接存储在索引的叶子节点。<br>  • <strong>缺点</strong>：<br>    ◦ 插入、更新、删除操作可能导致数据重新排序，性能开销较大。</p>
+<p>• <strong>非聚簇索引</strong>：<br>  • <strong>优点</strong>：<br>    ◦ 适合频繁更新的列，因为数据行的物理存储顺序不受影响。<br>    ◦ 一张表可以有多个非聚簇索引，适合多条件查询。<br>  • <strong>缺点</strong>：<br>    ◦ 查询时需要先查找索引，再通过指针访问数据行，增加了 I&#x2F;O 操作。<br>    ◦ 范围查询性能不如聚簇索引。</p>
+<hr>
+<h3 id="4-适用场景-1"><a href="#4-适用场景-1" class="headerlink" title="4. 适用场景"></a><strong>4. 适用场景</strong></h3><p>• <strong>聚簇索引</strong>：<br>  • 适合用于主键或唯一性约束的列。<br>  • 适合范围查询（如 <code>WHERE id BETWEEN 10 AND 20</code>）。<br>  • 适合数据相对静态的场景（如日志表、历史数据表）。</p>
+<p>• <strong>非聚簇索引</strong>：<br>  • 适合用于经常查询但更新较少的列。<br>  • 适合多条件查询（如 <code>WHERE name = &#39;Alice&#39; AND age = 30</code>）。<br>  • 适合需要多个索引的场景。</p>
+<hr>
+<h3 id="5-示例"><a href="#5-示例" class="headerlink" title="5. 示例"></a><strong>5. 示例</strong></h3><p>假设有一张表 <code>users</code>，结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Alice</td>
+<td>25</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Bob</td>
+<td>30</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Carol</td>
+<td>28</td>
+</tr>
+</tbody></table>
+<h4 id="聚簇索引："><a href="#聚簇索引：" class="headerlink" title="聚簇索引："></a><strong>聚簇索引</strong>：</h4><p>• 如果 <code>id</code> 是聚簇索引，数据会按照 <code>id</code> 的顺序物理存储：<br>  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">数据页 1: (1, Alice, 25)</span><br><span class="line">数据页 2: (2, Bob, 30)</span><br><span class="line">数据页 3: (3, Carol, 28)</span><br></pre></td></tr></table></figure></p>
+<h4 id="非聚簇索引："><a href="#非聚簇索引：" class="headerlink" title="非聚簇索引："></a><strong>非聚簇索引</strong>：</h4><p>• 如果 <code>name</code> 是非聚簇索引，索引的叶子节点存储的是指向数据行的指针：<br>  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">索引页: (Alice -&gt; 数据页 1)</span><br><span class="line">        (Bob -&gt; 数据页 2)</span><br><span class="line">        (Carol -&gt; 数据页 3)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a><strong>6. 总结</strong></h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>聚簇索引</th>
+<th>非聚簇索引</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据存储顺序</td>
+<td>按索引键值顺序存储</td>
+<td>数据存储顺序与索引无关</td>
+</tr>
+<tr>
+<td>叶子节点存储内容</td>
+<td>实际数据行</td>
+<td>指向数据行的指针（或主键值）</td>
+</tr>
+<tr>
+<td>索引数量</td>
+<td>一张表只能有一个</td>
+<td>一张表可以有多个</td>
+</tr>
+<tr>
+<td>范围查询性能</td>
+<td>高</td>
+<td>低</td>
+</tr>
+<tr>
+<td>插入&#x2F;更新&#x2F;删除性能</td>
+<td>低（可能导致数据重排序）</td>
+<td>高（不影响数据物理存储顺序）</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>主键、范围查询、静态数据</td>
+<td>多条件查询、频繁更新的列</td>
+</tr>
+</tbody></table>
+<p>聚簇索引和非聚簇索引各有优缺点，应根据具体场景选择合适的索引类型。通常情况下，主键使用聚簇索引，其他列使用非聚簇索引。</p>
+<h1 id="char占几个字节-基本数据类型和包装类"><a href="#char占几个字节-基本数据类型和包装类" class="headerlink" title="char占几个字节(基本数据类型和包装类)"></a>char占几个字节(基本数据类型和包装类)</h1><p>在 Java 中，<strong>基本数据类型（Primitive Data Types）</strong> 和 <strong>包装类（Wrapper Classes）</strong> 是两种不同的数据类型，它们在存储方式、使用场景和功能上有显著区别。以下是它们的详细对比：</p>
+<hr>
+<h3 id="1-基本数据类型"><a href="#1-基本数据类型" class="headerlink" title="1. 基本数据类型"></a><strong>1. 基本数据类型</strong></h3><p>基本数据类型是 Java 中最基础的数据类型，它们是原始值，直接存储在栈内存中。Java 提供了 8 种基本数据类型：</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>大小（字节）</th>
+<th>默认值</th>
+<th>取值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>byte</code></td>
+<td>1</td>
+<td>0</td>
+<td>-128 到 127</td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td>2</td>
+<td>0</td>
+<td>-32,768 到 32,767</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td>4</td>
+<td>0</td>
+<td>-2^31 到 2^31-1</td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td>8</td>
+<td>0L</td>
+<td>-2^63 到 2^63-1</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>4</td>
+<td>0.0f</td>
+<td>单精度浮点数</td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td>8</td>
+<td>0.0d</td>
+<td>双精度浮点数</td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td>2</td>
+<td>‘\u0000’</td>
+<td>0 到 65,535（Unicode 字符）</td>
+</tr>
+<tr>
+<td><code>boolean</code></td>
+<td>1</td>
+<td>false</td>
+<td>true 或 false</td>
+</tr>
+</tbody></table>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a><strong>特点</strong>：</h4><p>• <strong>存储方式</strong>：直接存储在栈内存中，效率高。<br>• <strong>性能</strong>：由于是原始值，操作速度快，内存占用少。<br>• <strong>功能限制</strong>：不支持面向对象的特性（如方法调用、继承等）。</p>
+<hr>
+<h3 id="2-包装类"><a href="#2-包装类" class="headerlink" title="2. 包装类"></a><strong>2. 包装类</strong></h3><p>包装类是对基本数据类型的封装，它们是类，存储在堆内存中。每个基本数据类型都有对应的包装类：</p>
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>包装类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>byte</code></td>
+<td><code>Byte</code></td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td><code>Short</code></td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td><code>Integer</code></td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td><code>Long</code></td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td><code>Float</code></td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td><code>Character</code></td>
+</tr>
+<tr>
+<td><code>boolean</code></td>
+<td><code>Boolean</code></td>
+</tr>
+</tbody></table>
+<h4 id="特点：-1"><a href="#特点：-1" class="headerlink" title="特点："></a><strong>特点</strong>：</h4><p>• <strong>存储方式</strong>：作为对象存储在堆内存中，栈内存中存储对象的引用。<br>• <strong>功能</strong>：支持面向对象的特性（如方法调用、继承等），并提供了一些实用方法（如 <code>Integer.parseInt()</code>）。<br>• <strong>自动装箱与拆箱</strong>：Java 支持自动装箱（将基本数据类型转换为包装类）和自动拆箱（将包装类转换为基本数据类型）。<br>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">10</span>; <span class="comment">// 自动装箱</span></span><br><span class="line"><span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> num;  <span class="comment">// 自动拆箱</span></span><br></pre></td></tr></table></figure><br>• <strong>性能</strong>：由于是对象，操作速度较慢，内存占用较多。</p>
+<hr>
+<h3 id="3-对比"><a href="#3-对比" class="headerlink" title="3. 对比"></a><strong>3. 对比</strong></h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>基本数据类型</th>
+<th>包装类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>存储方式</strong></td>
+<td>栈内存</td>
+<td>堆内存</td>
+</tr>
+<tr>
+<td><strong>内存占用</strong></td>
+<td>较少</td>
+<td>较多</td>
+</tr>
+<tr>
+<td><strong>性能</strong></td>
+<td>高</td>
+<td>低</td>
+</tr>
+<tr>
+<td><strong>默认值</strong></td>
+<td>有默认值（如 <code>int</code> 默认是 0）</td>
+<td>默认是 <code>null</code></td>
+</tr>
+<tr>
+<td><strong>功能</strong></td>
+<td>不支持面向对象特性</td>
+<td>支持面向对象特性，提供实用方法</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>性能要求高的场景</td>
+<td>需要面向对象特性或集合类的场景</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="4-使用场景"><a href="#4-使用场景" class="headerlink" title="4. 使用场景"></a><strong>4. 使用场景</strong></h3><p>• <strong>基本数据类型</strong>：<br>  • 适合性能要求高的场景，如循环、计算等。<br>  • 适合存储简单的数值或布尔值。</p>
+<p>• <strong>包装类</strong>：<br>  • 适合需要面向对象特性的场景，如集合类（<code>List</code>、<code>Set</code>、<code>Map</code> 等）只能存储对象。<br>  • 适合需要实用方法的场景，如字符串转换、类型检查等。</p>
+<hr>
+<h3 id="5-示例-1"><a href="#5-示例-1" class="headerlink" title="5. 示例"></a><strong>5. 示例</strong></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 基本数据类型</span></span><br><span class="line"><span class="type">int</span> <span class="variable">num1</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">double</span> <span class="variable">num2</span> <span class="operator">=</span> <span class="number">3.14</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 包装类</span></span><br><span class="line"><span class="type">Integer</span> <span class="variable">num3</span> <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line"><span class="type">Double</span> <span class="variable">num4</span> <span class="operator">=</span> <span class="number">2.71</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自动装箱与拆箱</span></span><br><span class="line"><span class="type">Integer</span> <span class="variable">num5</span> <span class="operator">=</span> num1; <span class="comment">// 自动装箱</span></span><br><span class="line"><span class="type">int</span> <span class="variable">num6</span> <span class="operator">=</span> num3;     <span class="comment">// 自动拆箱</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实用方法</span></span><br><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;123&quot;</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">num7</span> <span class="operator">=</span> Integer.parseInt(str); <span class="comment">// 字符串转整数</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="6-总结-1"><a href="#6-总结-1" class="headerlink" title="6. 总结"></a><strong>6. 总结</strong></h3><p>• <strong>基本数据类型</strong>：效率高，适合性能要求高的场景。<br>• <strong>包装类</strong>：功能丰富，适合需要面向对象特性或集合类的场景。<br>• 在 Java 5 之后，自动装箱和拆箱机制使得基本数据类型和包装类之间的转换更加方便。开发者应根据具体需求选择合适的数据类型。</p>
+<h1 id="java内存结构"><a href="#java内存结构" class="headerlink" title="java内存结构"></a>java内存结构</h1><p>Java 内存结构是 Java 虚拟机（JVM）在运行 Java 程序时管理内存的方式。它主要分为以下几个部分：</p>
+<hr>
+<h3 id="1-程序计数器（Program-Counter-Register）"><a href="#1-程序计数器（Program-Counter-Register）" class="headerlink" title="1. 程序计数器（Program Counter Register）"></a><strong>1. 程序计数器（Program Counter Register）</strong></h3><p>• <strong>作用</strong>：记录当前线程正在执行的字节码指令的地址。<br>• <strong>特点</strong>：<br>  • 每个线程独立拥有一个程序计数器。<br>  • 如果执行的是 Java 方法，计数器记录的是字节码指令地址；如果执行的是本地方法（Native Method），计数器值为空（Undefined）。<br>• <strong>生命周期</strong>：与线程的生命周期一致。</p>
+<hr>
+<h3 id="2-Java-虚拟机栈（Java-Virtual-Machine-Stack）"><a href="#2-Java-虚拟机栈（Java-Virtual-Machine-Stack）" class="headerlink" title="2. Java 虚拟机栈（Java Virtual Machine Stack）"></a><strong>2. Java 虚拟机栈（Java Virtual Machine Stack）</strong></h3><p>• <strong>作用</strong>：用于存储方法调用的栈帧（Stack Frame），包括局部变量表、操作数栈、动态链接和方法返回地址。<br>• <strong>特点</strong>：<br>  • 每个线程独立拥有一个栈。<br>  • 栈帧是方法调用的基本单位，每个方法调用都会创建一个栈帧。<br>  • 栈的大小可以通过 JVM 参数 <code>-Xss</code> 设置。<br>• <strong>常见异常</strong>：<br>  • <code>StackOverflowError</code>：栈深度超出限制（如递归调用过深）。<br>  • <code>OutOfMemoryError</code>：栈无法分配更多内存。</p>
+<hr>
+<h3 id="3-本地方法栈（Native-Method-Stack）"><a href="#3-本地方法栈（Native-Method-Stack）" class="headerlink" title="3. 本地方法栈（Native Method Stack）"></a><strong>3. 本地方法栈（Native Method Stack）</strong></h3><p>• <strong>作用</strong>：用于支持本地方法（Native Method）的执行。<br>• <strong>特点</strong>：<br>  • 与 Java 虚拟机栈类似，但服务于本地方法。<br>  • 本地方法是用其他语言（如 C&#x2F;C++）编写的方法。<br>• <strong>常见异常</strong>：与 Java 虚拟机栈相同。</p>
+<hr>
+<h3 id="4-Java-堆（Java-Heap）"><a href="#4-Java-堆（Java-Heap）" class="headerlink" title="4. Java 堆（Java Heap）"></a><strong>4. Java 堆（Java Heap）</strong></h3><p>• <strong>作用</strong>：用于存储对象实例和数组，是垃圾回收的主要区域。<br>• <strong>特点</strong>：<br>  • 所有线程共享 Java 堆。<br>  • 堆的大小可以通过 JVM 参数 <code>-Xms</code>（初始大小）和 <code>-Xmx</code>（最大大小）设置。<br>  • 堆可以进一步划分为新生代（Young Generation）和老年代（Old Generation），新生代又分为 Eden 区、Survivor 区（From 和 To）。<br>• <strong>常见异常</strong>：<br>  • <code>OutOfMemoryError</code>：堆内存不足，无法分配更多对象。</p>
+<hr>
+<h3 id="5-方法区（Method-Area）"><a href="#5-方法区（Method-Area）" class="headerlink" title="5. 方法区（Method Area）"></a><strong>5. 方法区（Method Area）</strong></h3><p>• <strong>作用</strong>：用于存储类信息、常量、静态变量、即时编译器编译后的代码等。<br>• <strong>特点</strong>：<br>  • 所有线程共享方法区。<br>  • 方法区是堆的逻辑部分，但在某些 JVM 实现中（如 HotSpot），方法区被称为“永久代”（PermGen）或“元空间”（Metaspace）。<br>  • 元空间的大小可以通过 JVM 参数 <code>-XX:MetaspaceSize</code> 和 <code>-XX:MaxMetaspaceSize</code> 设置。<br>• <strong>常见异常</strong>：<br>  • <code>OutOfMemoryError</code>：方法区内存不足，无法加载更多类。</p>
+<hr>
+<h3 id="6-运行时常量池（Runtime-Constant-Pool）"><a href="#6-运行时常量池（Runtime-Constant-Pool）" class="headerlink" title="6. 运行时常量池（Runtime Constant Pool）"></a><strong>6. 运行时常量池（Runtime Constant Pool）</strong></h3><p>• <strong>作用</strong>：用于存储类文件中的常量池信息，包括字符串常量、类和接口的全限定名、字段和方法的名称和描述符等。<br>• <strong>特点</strong>：<br>  • 运行时常量池是方法区的一部分。<br>  • 在类加载后，常量池中的符号引用会被解析为直接引用。<br>• <strong>常见异常</strong>：<br>  • <code>OutOfMemoryError</code>：常量池内存不足。</p>
+<hr>
+<h3 id="7-直接内存（Direct-Memory）"><a href="#7-直接内存（Direct-Memory）" class="headerlink" title="7. 直接内存（Direct Memory）"></a><strong>7. 直接内存（Direct Memory）</strong></h3><p>• <strong>作用</strong>：用于支持 NIO（New I&#x2F;O）操作，直接分配在堆外内存中。<br>• <strong>特点</strong>：<br>  • 直接内存不受 Java 堆大小限制，但受操作系统内存限制。<br>  • 直接内存的分配和释放通过 <code>ByteBuffer.allocateDirect()</code> 和 <code>Unsafe</code> 类实现。<br>• <strong>常见异常</strong>：<br>  • <code>OutOfMemoryError</code>：直接内存不足。</p>
+<hr>
+<h3 id="总结-7"><a href="#总结-7" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>Java 内存结构是 JVM 管理内存的核心部分，主要包括以下区域：</p>
+<ol>
+<li><strong>程序计数器</strong>：记录线程执行位置。</li>
+<li><strong>Java 虚拟机栈</strong>：存储方法调用的栈帧。</li>
+<li><strong>本地方法栈</strong>：支持本地方法执行。</li>
+<li><strong>Java 堆</strong>：存储对象实例和数组。</li>
+<li><strong>方法区</strong>：存储类信息、常量、静态变量等。</li>
+<li><strong>运行时常量池</strong>：存储类文件中的常量池信息。</li>
+<li><strong>直接内存</strong>：支持 NIO 操作，分配在堆外内存。</li>
+</ol>
+<p>每个区域都有其特定的作用和生命周期，理解这些区域有助于优化 Java 程序的性能和内存使用。</p>
+<h1 id="mysql中having关键字的用法（类似关键字）"><a href="#mysql中having关键字的用法（类似关键字）" class="headerlink" title="mysql中having关键字的用法（类似关键字）"></a>mysql中having关键字的用法（类似关键字）</h1><p>在 MySQL 中，<code>HAVING</code> 关键字用于对分组后的结果进行过滤，通常与 <code>GROUP BY</code> 一起使用。它的作用类似于 <code>WHERE</code>，但 <code>WHERE</code> 是在分组前过滤数据，而 <code>HAVING</code> 是在分组后过滤数据。</p>
+<hr>
+<h3 id="HAVING-关键字的用法"><a href="#HAVING-关键字的用法" class="headerlink" title="HAVING 关键字的用法"></a><strong>HAVING 关键字的用法</strong></h3><h4 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column1, column2, aggregate_function(column3)</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">table</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> column1, column2</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">condition</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a>示例：</h4><p>假设有一张 <code>orders</code> 表，记录订单信息：</p>
+<table>
+<thead>
+<tr>
+<th>order_id</th>
+<th>customer_id</th>
+<th>amount</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>101</td>
+<td>100</td>
+</tr>
+<tr>
+<td>2</td>
+<td>102</td>
+<td>200</td>
+</tr>
+<tr>
+<td>3</td>
+<td>101</td>
+<td>150</td>
+</tr>
+<tr>
+<td>4</td>
+<td>103</td>
+<td>300</td>
+</tr>
+<tr>
+<td>5</td>
+<td>102</td>
+<td>250</td>
+</tr>
+</tbody></table>
+<p>查询每个客户的总消费金额，并筛选出总金额大于 200 的客户：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customer_id, <span class="built_in">SUM</span>(amount) <span class="keyword">AS</span> total_amount</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_id</span><br><span class="line"><span class="keyword">HAVING</span> total_amount <span class="operator">&gt;</span> <span class="number">200</span>;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>total_amount</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>102</td>
+<td>450</td>
+</tr>
+<tr>
+<td>103</td>
+<td>300</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="HAVING-和-WHERE-的区别"><a href="#HAVING-和-WHERE-的区别" class="headerlink" title="HAVING 和 WHERE 的区别"></a><strong>HAVING 和 WHERE 的区别</strong></h3><table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>作用阶段</th>
+<th>适用对象</th>
+<th>能否使用聚合函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>WHERE</code></td>
+<td>分组前过滤数据</td>
+<td>单行数据</td>
+<td>不能</td>
+</tr>
+<tr>
+<td><code>HAVING</code></td>
+<td>分组后过滤数据</td>
+<td>分组后的结果集</td>
+<td>能</td>
+</tr>
+</tbody></table>
+<h4 id="示例：-2"><a href="#示例：-2" class="headerlink" title="示例："></a>示例：</h4><p>查询订单金额大于 150 的客户，并统计其总消费金额：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customer_id, <span class="built_in">SUM</span>(amount) <span class="keyword">AS</span> total_amount</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">WHERE</span> amount <span class="operator">&gt;</span> <span class="number">150</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_id;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="其他类似关键字"><a href="#其他类似关键字" class="headerlink" title="其他类似关键字"></a><strong>其他类似关键字</strong></h3><ol>
+<li><p><strong>WHERE</strong>：<br>• 用于在查询中过滤行数据。<br>• 示例：</p>
+  <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> orders <span class="keyword">WHERE</span> amount <span class="operator">&gt;</span> <span class="number">150</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>GROUP BY</strong>：<br>• 用于将数据按指定列分组，通常与聚合函数（如 <code>SUM</code>、<code>COUNT</code>、<code>AVG</code> 等）一起使用。<br>• 示例：</p>
+  <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customer_id, <span class="built_in">SUM</span>(amount) <span class="keyword">AS</span> total_amount</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_id;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>ORDER BY</strong>：<br>• 用于对查询结果进行排序。<br>• 示例：</p>
+  <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> orders <span class="keyword">ORDER</span> <span class="keyword">BY</span> amount <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>LIMIT</strong>：<br>• 用于限制查询结果的行数。<br>• 示例：</p>
+  <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> orders LIMIT <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>DISTINCT</strong>：<br>• 用于去除查询结果中的重复行。<br>• 示例：</p>
+  <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> customer_id <span class="keyword">FROM</span> orders;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h3 id="综合示例"><a href="#综合示例" class="headerlink" title="综合示例"></a><strong>综合示例</strong></h3><p>查询每个客户的总消费金额，筛选出总金额大于 200 的客户，并按总金额降序排序：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customer_id, <span class="built_in">SUM</span>(amount) <span class="keyword">AS</span> total_amount</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_id</span><br><span class="line"><span class="keyword">HAVING</span> total_amount <span class="operator">&gt;</span> <span class="number">200</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> total_amount <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="总结-8"><a href="#总结-8" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>• <code>HAVING</code> 用于对分组后的结果进行过滤，通常与 <code>GROUP BY</code> 和聚合函数一起使用。<br>• <code>HAVING</code> 和 <code>WHERE</code> 的区别在于作用阶段和适用对象。<br>• 其他类似关键字包括 <code>WHERE</code>、<code>GROUP BY</code>、<code>ORDER BY</code>、<code>LIMIT</code> 和 <code>DISTINCT</code>，它们分别用于过滤、分组、排序、限制行数和去重。</p>
+<h1 id="线程同步有哪些实现方式"><a href="#线程同步有哪些实现方式" class="headerlink" title="线程同步有哪些实现方式"></a>线程同步有哪些实现方式</h1><p>线程同步是多线程编程中确保多个线程安全访问共享资源的关键技术。以下是常见的线程同步实现方式：</p>
+<hr>
+<h3 id="1-synchronized-关键字"><a href="#1-synchronized-关键字" class="headerlink" title="1. synchronized 关键字"></a><strong>1. <code>synchronized</code> 关键字</strong></h3><p>• <strong>作用</strong>：通过锁定对象或方法，确保同一时间只有一个线程可以访问共享资源。<br>• <strong>实现方式</strong>：<br>  • 修饰实例方法：锁定当前实例对象。<br>    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 线程安全代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>  • 修饰静态方法：锁定当前类的 <code>Class</code> 对象。<br>    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 线程安全代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>  • 修饰代码块：锁定指定对象。<br>    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="built_in">this</span>) &#123;</span><br><span class="line">        <span class="comment">// 线程安全代码</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="2-ReentrantLock"><a href="#2-ReentrantLock" class="headerlink" title="2. ReentrantLock"></a><strong>2. <code>ReentrantLock</code></strong></h3><p>• <strong>作用</strong>：显式锁，提供比 <code>synchronized</code> 更灵活的锁定机制。<br>• <strong>实现方式</strong>：<br>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">ReentrantLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">        lock.lock(); <span class="comment">// 加锁</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 线程安全代码</span></span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock(); <span class="comment">// 释放锁</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="3-volatile-关键字"><a href="#3-volatile-关键字" class="headerlink" title="3. volatile 关键字"></a><strong>3. <code>volatile</code> 关键字</strong></h3><p>• <strong>作用</strong>：确保变量的可见性，但不保证原子性。<br>• <strong>实现方式</strong>：<br>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setFlag</span><span class="params">()</span> &#123;</span><br><span class="line">        flag = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">getFlag</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> flag;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="4-原子类（java-util-concurrent-atomic-包）"><a href="#4-原子类（java-util-concurrent-atomic-包）" class="headerlink" title="4. 原子类（java.util.concurrent.atomic 包）"></a><strong>4. 原子类（<code>java.util.concurrent.atomic</code> 包）</strong></h3><p>• <strong>作用</strong>：通过 CAS（Compare-And-Swap）操作实现无锁线程安全。<br>• <strong>实现方式</strong>：<br>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">AtomicInteger</span> <span class="variable">counter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">increment</span><span class="params">()</span> &#123;</span><br><span class="line">        counter.incrementAndGet();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="5-CountDownLatch"><a href="#5-CountDownLatch" class="headerlink" title="5. CountDownLatch"></a><strong>5. <code>CountDownLatch</code></strong></h3><p>• <strong>作用</strong>：允许一个或多个线程等待其他线程完成操作。<br>• <strong>实现方式</strong>：<br>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="type">CountDownLatch</span> <span class="variable">latch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CountDownLatch</span>(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">                <span class="comment">// 执行任务</span></span><br><span class="line">                latch.countDown();</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        latch.await(); <span class="comment">// 等待所有线程完成任务</span></span><br><span class="line">        System.out.println(<span class="string">&quot;All tasks completed.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="6-CyclicBarrier"><a href="#6-CyclicBarrier" class="headerlink" title="6. CyclicBarrier"></a><strong>6. <code>CyclicBarrier</code></strong></h3><p>• <strong>作用</strong>：让一组线程互相等待，直到所有线程都到达某个屏障点。<br>• <strong>实现方式</strong>：<br>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.CyclicBarrier;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">CyclicBarrier</span> <span class="variable">barrier</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CyclicBarrier</span>(<span class="number">3</span>, () -&gt; &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;All threads reached the barrier.&quot;</span>);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="comment">// 执行任务</span></span><br><span class="line">                    barrier.await();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="7-Semaphore"><a href="#7-Semaphore" class="headerlink" title="7. Semaphore"></a><strong>7. <code>Semaphore</code></strong></h3><p>• <strong>作用</strong>：控制同时访问某个资源的线程数量。<br>• <strong>实现方式</strong>：<br>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.Semaphore;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">Semaphore</span> <span class="variable">semaphore</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Semaphore</span>(<span class="number">3</span>); <span class="comment">// 允许最多 3 个线程同时访问</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        semaphore.acquire(); <span class="comment">// 获取许可</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 线程安全代码</span></span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            semaphore.release(); <span class="comment">// 释放许可</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="8-BlockingQueue"><a href="#8-BlockingQueue" class="headerlink" title="8. BlockingQueue"></a><strong>8. <code>BlockingQueue</code></strong></h3><p>• <strong>作用</strong>：实现生产者-消费者模型，线程安全地管理任务队列。<br>• <strong>实现方式</strong>：<br>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.BlockingQueue;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.LinkedBlockingQueue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        BlockingQueue&lt;Integer&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedBlockingQueue</span>&lt;&gt;(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 生产者线程</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                queue.put(<span class="number">1</span>); <span class="comment">// 添加任务</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 消费者线程</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">task</span> <span class="operator">=</span> queue.take(); <span class="comment">// 获取任务</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="9-ThreadLocal"><a href="#9-ThreadLocal" class="headerlink" title="9. ThreadLocal"></a><strong>9. <code>ThreadLocal</code></strong></h3><p>• <strong>作用</strong>：为每个线程提供独立的变量副本，避免线程间共享变量。<br>• <strong>实现方式</strong>：<br>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal&lt;Integer&gt; threadLocal = ThreadLocal.withInitial(() -&gt; <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">        threadLocal.set(threadLocal.get() + <span class="number">1</span>); <span class="comment">// 修改线程局部变量</span></span><br><span class="line">        System.out.println(threadLocal.get());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="总结-9"><a href="#总结-9" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>线程同步的实现方式包括：</p>
+<ol>
+<li>**<code>synchronized</code>**：内置锁，简单易用。</li>
+<li>**<code>ReentrantLock</code>**：显式锁，功能更强大。</li>
+<li>**<code>volatile</code>**：保证可见性，不保证原子性。</li>
+<li><strong>原子类</strong>：无锁线程安全，适合简单操作。</li>
+<li>**<code>CountDownLatch</code>**：等待多个线程完成任务。</li>
+<li>**<code>CyclicBarrier</code>**：线程互相等待，到达屏障点。</li>
+<li>**<code>Semaphore</code>**：控制并发访问数量。</li>
+<li>**<code>BlockingQueue</code>**：实现生产者-消费者模型。</li>
+<li>**<code>ThreadLocal</code>**：为每个线程提供独立变量副本。</li>
+</ol>
+<p>根据具体场景选择合适的同步方式，可以有效解决多线程并发问题。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">怪陆离辛</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/03/08/%E9%AB%98%E9%A2%91%E5%85%AB%E8%82%A1%E6%80%BB%E7%BB%931/">http://example.com/2025/03/08/%E9%AB%98%E9%A2%91%E5%85%AB%E8%82%A1%E6%80%BB%E7%BB%931/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">格 致</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%98%A5%E6%8B%9B/">春招</a><a class="post-meta__tags" href="/tags/%E5%85%AB%E8%82%A1/">八股</a></div><div class="post_share"><div class="social-share" data-image="/img/12.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/03/08/%E9%AB%98%E9%A2%91%E5%85%AB%E8%82%A1%E6%80%BB%E7%BB%932/" title="高频八股总结2"><img class="cover" src="/img/12.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">高频八股总结2</div></div></a></div><div class="next-post pull-right"><a href="/2025/03/05/%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B8%83%E5%BC%8FSession%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目分布式Session知识点拷打"><img class="cover" src="/img/10.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">项目分布式Session知识点拷打</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2025/03/05/%E7%AE%80%E5%8E%86%E7%9F%A5%E8%AF%86%E7%82%B9/" title="简历知识点"><img class="cover" src="/img/10.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="title">简历知识点</div></div></a></div><div><a href="/2025/03/05/%E9%A1%B9%E7%9B%AEJWT%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目JWT知识点拷打"><img class="cover" src="/img/9.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="title">项目JWT知识点拷打</div></div></a></div><div><a href="/2025/03/05/%E9%A1%B9%E7%9B%AERedis-Lua%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目Redis+Lua知识点拷打"><img class="cover" src="/img/12.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="title">项目Redis+Lua知识点拷打</div></div></a></div><div><a href="/2025/03/05/%E9%A1%B9%E7%9B%AESpring-Task%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目Spring Task知识点拷打"><img class="cover" src="/img/12.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="title">项目Spring Task知识点拷打</div></div></a></div><div><a href="/2025/03/05/%E9%A1%B9%E7%9B%AEwebsocket%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目websocket知识点拷打"><img class="cover" src="/img/6.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="title">项目websocket知识点拷打</div></div></a></div><div><a href="/2025/03/05/%E9%A1%B9%E7%9B%AERedis%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目Redis缓存优化知识点拷打"><img class="cover" src="/img/4.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="title">项目Redis缓存优化知识点拷打</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">怪陆离辛</div><div class="author-info__description">Choose what you love</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">38</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gllxgllx"><i class="fab fa-github"></i><span>关注</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://space.bilibili.com/87425918" target="_blank" title="bilibili"><i class="iconfont icon-icon_bilibili"></i></a><a class="social-icon" href="https://wpa.qq.com/msgrd?v=3&amp;uin=202555941&amp;site=qqq&amp;menu=yes" target="_blank" title="qq"><i class="iconfont icon-QQ1"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">转载内容仅供参考和学习</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%8C%E6%A0%B8%E5%BF%83%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%9D%9E%E6%A0%B8%E5%BF%83%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">线程池的原理，核心线程与非核心线程的区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.0.1.</span> <span class="toc-text">线程池的原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%9D%9E%E6%A0%B8%E5%BF%83%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.0.2.</span> <span class="toc-text">核心线程与非核心线程的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.0.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%9E%E6%A0%B8%E5%BF%83%E7%BA%BF%E7%A8%8B%E6%B1%A0%E9%94%80%E6%AF%81%E7%9A%84%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">非核心线程池销毁的具体实现过程？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-1"><span class="toc-number">2.0.1.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">如何保证线程安全？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 使用同步机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E9%94%81"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. 使用锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8%E5%8E%9F%E5%AD%90%E5%8F%98%E9%87%8F"><span class="toc-number">3.0.3.</span> <span class="toc-text">3. 使用原子变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">3.0.4.</span> <span class="toc-text">4. 使用线程安全的数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%81%BF%E5%85%8D%E5%85%B1%E4%BA%AB%E7%8A%B6%E6%80%81"><span class="toc-number">3.0.5.</span> <span class="toc-text">5. 避免共享状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.0.6.</span> <span class="toc-text">6. 使用不可变对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E4%BD%BF%E7%94%A8volatile%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">3.0.7.</span> <span class="toc-text">7. 使用volatile关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%BA%93%E6%88%96%E6%A1%86%E6%9E%B6"><span class="toc-number">3.0.8.</span> <span class="toc-text">8. 使用线程安全的库或框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-2"><span class="toc-number">3.0.9.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#synchronized%E5%AE%9E%E7%8E%B0%E7%9A%84%E9%80%BB%E8%BE%91%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">synchronized实现的逻辑？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">4.0.1.</span> <span class="toc-text">示例代码：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">4.0.2.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#volatile%E5%85%B3%E9%94%AE%E5%AD%97%E6%9C%89%E4%BB%80%E4%B9%88%E5%8A%9F%E8%83%BD"><span class="toc-number">5.</span> <span class="toc-text">volatile关键字有什么功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BF%9D%E8%AF%81%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="toc-number">5.0.1.</span> <span class="toc-text">1. 保证可见性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%A6%81%E6%AD%A2%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92%E5%BA%8F"><span class="toc-number">5.0.2.</span> <span class="toc-text">2. 禁止指令重排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%8D%E4%BF%9D%E8%AF%81%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="toc-number">5.0.3.</span> <span class="toc-text">3. 不保证原子性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">5.0.4.</span> <span class="toc-text">4. 适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E4%B8%8D%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">5.0.5.</span> <span class="toc-text">5. 不适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="toc-number">5.0.6.</span> <span class="toc-text">示例代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-3"><span class="toc-number">5.0.7.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E8%BF%99%E9%87%8C%E6%B2%A1%E4%BD%BF%E7%94%A8volatile%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88"><span class="toc-number">6.</span> <span class="toc-text">如果这里没使用volatile会发生什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E5%9C%BA%E6%99%AF"><span class="toc-number">6.0.1.</span> <span class="toc-text">示例场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-4"><span class="toc-number">6.0.2.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8Dmysql%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-number">7.</span> <span class="toc-text">介绍mysql的事务隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%AF%BB%E6%9C%AA%E6%8F%90%E4%BA%A4%EF%BC%88Read-Uncommitted%EF%BC%89"><span class="toc-number">7.0.1.</span> <span class="toc-text">1. 读未提交（Read Uncommitted）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AF%BB%E5%B7%B2%E6%8F%90%E4%BA%A4%EF%BC%88Read-Committed%EF%BC%89"><span class="toc-number">7.0.2.</span> <span class="toc-text">2. 读已提交（Read Committed）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%88Repeatable-Read%EF%BC%89"><span class="toc-number">7.0.3.</span> <span class="toc-text">3. 可重复读（Repeatable Read）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%B8%B2%E8%A1%8C%E5%8C%96%EF%BC%88Serializable%EF%BC%89"><span class="toc-number">7.0.4.</span> <span class="toc-text">4. 串行化（Serializable）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-5"><span class="toc-number">7.0.5.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="toc-number">8.</span> <span class="toc-text">可重复读实现的原理？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%EF%BC%88MVCC%EF%BC%89"><span class="toc-number">8.0.1.</span> <span class="toc-text">1. 多版本并发控制（MVCC）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="toc-number">8.0.1.1.</span> <span class="toc-text">具体实现：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-number">8.0.1.2.</span> <span class="toc-text">示例：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%94%81%E5%AE%9A%E6%9C%BA%E5%88%B6"><span class="toc-number">8.0.2.</span> <span class="toc-text">2. 锁定机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0%EF%BC%9A-1"><span class="toc-number">8.0.2.1.</span> <span class="toc-text">具体实现：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">8.0.3.</span> <span class="toc-text">3. 可重复读的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%A4%BA%E4%BE%8B"><span class="toc-number">8.0.4.</span> <span class="toc-text">4. 示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%EF%BC%9A"><span class="toc-number">8.0.4.1.</span> <span class="toc-text">场景：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%80%BB%E7%BB%93"><span class="toc-number">8.0.5.</span> <span class="toc-text">5. 总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#B-%E6%A0%91%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%E5%92%8C%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="toc-number">9.</span> <span class="toc-text">B+树有什么特点和好处？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">9.0.1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%BD%E5%A4%84"><span class="toc-number">9.0.2.</span> <span class="toc-text">好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-%E6%A0%91-vs-B%E6%A0%91"><span class="toc-number">9.0.3.</span> <span class="toc-text">B+树 vs B树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-6"><span class="toc-number">9.0.4.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E5%92%8C%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">10.</span> <span class="toc-text">聚簇索引和非聚簇索引区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89"><span class="toc-number">10.0.1.</span> <span class="toc-text">1. 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">10.0.2.</span> <span class="toc-text">2. 存储方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%80%A7%E8%83%BD"><span class="toc-number">10.0.3.</span> <span class="toc-text">3. 性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF-1"><span class="toc-number">10.0.4.</span> <span class="toc-text">4. 适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%A4%BA%E4%BE%8B"><span class="toc-number">10.0.5.</span> <span class="toc-text">5. 示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%EF%BC%9A"><span class="toc-number">10.0.5.1.</span> <span class="toc-text">聚簇索引：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%EF%BC%9A"><span class="toc-number">10.0.5.2.</span> <span class="toc-text">非聚簇索引：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%80%BB%E7%BB%93"><span class="toc-number">10.0.6.</span> <span class="toc-text">6. 总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#char%E5%8D%A0%E5%87%A0%E4%B8%AA%E5%AD%97%E8%8A%82-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8C%85%E8%A3%85%E7%B1%BB"><span class="toc-number">11.</span> <span class="toc-text">char占几个字节(基本数据类型和包装类)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">11.0.1.</span> <span class="toc-text">1. 基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-number">11.0.1.1.</span> <span class="toc-text">特点：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8C%85%E8%A3%85%E7%B1%BB"><span class="toc-number">11.0.2.</span> <span class="toc-text">2. 包装类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A-1"><span class="toc-number">11.0.2.1.</span> <span class="toc-text">特点：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AF%B9%E6%AF%94"><span class="toc-number">11.0.3.</span> <span class="toc-text">3. 对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">11.0.4.</span> <span class="toc-text">4. 使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%A4%BA%E4%BE%8B-1"><span class="toc-number">11.0.5.</span> <span class="toc-text">5. 示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%80%BB%E7%BB%93-1"><span class="toc-number">11.0.6.</span> <span class="toc-text">6. 总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#java%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-number">12.</span> <span class="toc-text">java内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88Program-Counter-Register%EF%BC%89"><span class="toc-number">12.0.1.</span> <span class="toc-text">1. 程序计数器（Program Counter Register）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%EF%BC%88Java-Virtual-Machine-Stack%EF%BC%89"><span class="toc-number">12.0.2.</span> <span class="toc-text">2. Java 虚拟机栈（Java Virtual Machine Stack）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88%EF%BC%88Native-Method-Stack%EF%BC%89"><span class="toc-number">12.0.3.</span> <span class="toc-text">3. 本地方法栈（Native Method Stack）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Java-%E5%A0%86%EF%BC%88Java-Heap%EF%BC%89"><span class="toc-number">12.0.4.</span> <span class="toc-text">4. Java 堆（Java Heap）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%96%B9%E6%B3%95%E5%8C%BA%EF%BC%88Method-Area%EF%BC%89"><span class="toc-number">12.0.5.</span> <span class="toc-text">5. 方法区（Method Area）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0%EF%BC%88Runtime-Constant-Pool%EF%BC%89"><span class="toc-number">12.0.6.</span> <span class="toc-text">6. 运行时常量池（Runtime Constant Pool）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98%EF%BC%88Direct-Memory%EF%BC%89"><span class="toc-number">12.0.7.</span> <span class="toc-text">7. 直接内存（Direct Memory）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-7"><span class="toc-number">12.0.8.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mysql%E4%B8%ADhaving%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E7%94%A8%E6%B3%95%EF%BC%88%E7%B1%BB%E4%BC%BC%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%89"><span class="toc-number">13.</span> <span class="toc-text">mysql中having关键字的用法（类似关键字）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HAVING-%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-number">13.0.1.</span> <span class="toc-text">HAVING 关键字的用法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A"><span class="toc-number">13.0.1.1.</span> <span class="toc-text">语法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A-1"><span class="toc-number">13.0.1.2.</span> <span class="toc-text">示例：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HAVING-%E5%92%8C-WHERE-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">13.0.2.</span> <span class="toc-text">HAVING 和 WHERE 的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A-2"><span class="toc-number">13.0.2.1.</span> <span class="toc-text">示例：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%B1%BB%E4%BC%BC%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">13.0.3.</span> <span class="toc-text">其他类似关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E7%A4%BA%E4%BE%8B"><span class="toc-number">13.0.4.</span> <span class="toc-text">综合示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-8"><span class="toc-number">13.0.5.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">14.</span> <span class="toc-text">线程同步有哪些实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-synchronized-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">14.0.1.</span> <span class="toc-text">1. synchronized 关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ReentrantLock"><span class="toc-number">14.0.2.</span> <span class="toc-text">2. ReentrantLock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-volatile-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">14.0.3.</span> <span class="toc-text">3. volatile 关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%8E%9F%E5%AD%90%E7%B1%BB%EF%BC%88java-util-concurrent-atomic-%E5%8C%85%EF%BC%89"><span class="toc-number">14.0.4.</span> <span class="toc-text">4. 原子类（java.util.concurrent.atomic 包）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-CountDownLatch"><span class="toc-number">14.0.5.</span> <span class="toc-text">5. CountDownLatch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-CyclicBarrier"><span class="toc-number">14.0.6.</span> <span class="toc-text">6. CyclicBarrier</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Semaphore"><span class="toc-number">14.0.7.</span> <span class="toc-text">7. Semaphore</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-BlockingQueue"><span class="toc-number">14.0.8.</span> <span class="toc-text">8. BlockingQueue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-ThreadLocal"><span class="toc-number">14.0.9.</span> <span class="toc-text">9. ThreadLocal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-9"><span class="toc-number">14.0.10.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/03/08/%E9%AB%98%E9%A2%91%E5%85%AB%E8%82%A1%E6%80%BB%E7%BB%934/" title="高频八股总结4"><img src="/img/8.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高频八股总结4"/></a><div class="content"><a class="title" href="/2025/03/08/%E9%AB%98%E9%A2%91%E5%85%AB%E8%82%A1%E6%80%BB%E7%BB%934/" title="高频八股总结4">高频八股总结4</a><time datetime="2025-03-08T11:56:50.000Z" title="发表于 2025-03-08 19:56:50">2025-03-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/08/%E9%AB%98%E9%A2%91%E5%85%AB%E8%82%A1%E6%80%BB%E7%BB%933/" title="高频八股总结3"><img src="/img/6.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高频八股总结3"/></a><div class="content"><a class="title" href="/2025/03/08/%E9%AB%98%E9%A2%91%E5%85%AB%E8%82%A1%E6%80%BB%E7%BB%933/" title="高频八股总结3">高频八股总结3</a><time datetime="2025-03-08T11:56:45.000Z" title="发表于 2025-03-08 19:56:45">2025-03-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/08/%E9%AB%98%E9%A2%91%E5%85%AB%E8%82%A1%E6%80%BB%E7%BB%932/" title="高频八股总结2"><img src="/img/12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高频八股总结2"/></a><div class="content"><a class="title" href="/2025/03/08/%E9%AB%98%E9%A2%91%E5%85%AB%E8%82%A1%E6%80%BB%E7%BB%932/" title="高频八股总结2">高频八股总结2</a><time datetime="2025-03-08T07:44:45.000Z" title="发表于 2025-03-08 15:44:45">2025-03-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/08/%E9%AB%98%E9%A2%91%E5%85%AB%E8%82%A1%E6%80%BB%E7%BB%931/" title="高频八股总结1"><img src="/img/12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高频八股总结1"/></a><div class="content"><a class="title" href="/2025/03/08/%E9%AB%98%E9%A2%91%E5%85%AB%E8%82%A1%E6%80%BB%E7%BB%931/" title="高频八股总结1">高频八股总结1</a><time datetime="2025-03-08T07:44:33.000Z" title="发表于 2025-03-08 15:44:33">2025-03-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/05/%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B8%83%E5%BC%8FSession%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目分布式Session知识点拷打"><img src="/img/10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="项目分布式Session知识点拷打"/></a><div class="content"><a class="title" href="/2025/03/05/%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B8%83%E5%BC%8FSession%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%B7%E6%89%93/" title="项目分布式Session知识点拷打">项目分布式Session知识点拷打</a><time datetime="2025-03-05T15:02:58.000Z" title="发表于 2025-03-05 23:02:58">2025-03-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By 怪陆离辛</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">The exploration is endless</div></div><div class="container" id="jsi-flying-fish-container"><script src="js/fish.js"></script></div><style>   @media only screen and (max-width: 767px){
+   #sidebar_search_box input[type=text]{width:calc(100% - 24px)}
+}</style></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://gllxtwikoo.zeabur.app',
+      region: 'ap-beijing',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://gllxtwikoo.zeabur.app',
+      region: 'ap-beijing',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/gh/xiabo2/CDN@latest/fish.js"></script><script src="/js/sakura.js"></script><script src="/js/xxx.js"></script><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></body></html>
