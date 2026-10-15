@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>风起小岛，把一片浅海留在此刻</title>
+      <link href="/2026/10/15/island-in-motion/"/>
+      <url>/2026/10/15/island-in-motion/</url>
+      
+        <content type="html"><![CDATA[<p>继雨夜便利店之后，博客里又多了一处可以停留的小地方。这一次，街角的雨声换成了浅海，暖黄色的灯光换成了沙滩上的日光。</p><p>它叫「风起小岛」。一块沙滩、几棵椰树、石头和珊瑚，被装进一个透明的方形容器。你可以从不同的角度看它，也可以轻轻摇晃，让海水追着容器的动作慢半拍，再慢慢平静下来。</p><p><img src="/works/island-in-motion/cover.webp" alt="风起小岛，透明海水中的热带微缩海岛"></p><p><a href="/works/island-in-motion/" style="display:inline-block;padding:.8em 1.4em;border-radius:7px;background:#335d4f;color:#f2f5eb;text-decoration:none;">去岛上坐坐 →</a></p><p>它没有任务，也没有需要完成的进度。绕着小岛看一圈，点一下海面，或者观察水波碰到边界后的回响，就已经是一小段完整的停留。</p><p>进入后有三种操作方式：</p><ul><li><strong>随心</strong>：拖动背景可以环游，拖动容器侧面可以轻摇；点击海面会点起涟漪，在水上拖动可以连续拨动海水。</li><li><strong>环游</strong>：在任何位置拖动，都用来旋转视角，适合慢慢看看岛上的细节。</li><li><strong>轻摇</strong>：在任何位置拖动，都用来轻摇容器；松手后，小岛会自然回正，海水还会继续晃一会儿。</li></ul><p>鼠标右键拖动始终可以旋转视角，滚轮可以缩放，按住 Shift 拖动可以直接摇晃。想重新开始时，点击重置按钮，或按一下 R。触屏上可以单指拖动，也可以双指缩放。</p><p>进入前可以选择「轻盈」「均衡」或「细腻」画质，默认是均衡。设备运行较慢时，可以先选轻盈；细腻档会增加水面分辨率和画面开销。进入后也能在设置里调整水波、阻尼和摇晃的灵敏度。点击右上角「返回作品」，或按 Esc，就能离开场景。</p><p>海水使用简化的高度场来表现扰动传播和衰减，容器的倾斜与水面的惯性叠加在一起。它更像一个能够回应手势的小模型：保留水的节奏和轻盈感，还不是完整的真实流体模拟。</p><p>希望这片小小的海，能给偶然路过的人留出一点空白。风来时，不用急着往前走，看看水波也很好。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 作品 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Three.js </tag>
+            
+            <tag> 作品 </tag>
+            
+            <tag> 交互设计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>把雨夜便利店，放进博客里</title>
       <link href="/2026/10/14/rainy-konbini/"/>
       <url>/2026/10/14/rainy-konbini/</url>
